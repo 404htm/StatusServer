@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="9d9c1d76-8495-4a75-ab98-36773ae7870d" ChangeDateTime="07/25/2015 03:26:25">
+    <Property Name="ElementName" Value="[dbo].[Environments].[Color]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Environments]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DisplayColor" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a898a8e9-898d-48b2-a19e-bec1b1dc8f07" ChangeDateTime="07/25/2015 03:42:21">
+    <Property Name="ElementName" Value="[dbo].[Environments].[Url]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Environments]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HealthCheckUrl" />
+  </Operation>
+</Operations>
