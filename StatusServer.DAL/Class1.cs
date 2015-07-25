@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StatusServer.Data
+namespace StatusServer.DAL
 {
     public class Class1
     {
