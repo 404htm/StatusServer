@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a362c6e83a44cea988070d6582f36cd" Name="Diagram1" ShowGrid="true">
+        <EntityTypeShape EntityType="DAL.Application" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Environment" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Error" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.ObjectState" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="DAL.FK__Environme__Appli__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Errors__Applicat__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Modules__Applica__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.FK__Errors__ModuleId__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="DAL.ErrorObjectStates" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

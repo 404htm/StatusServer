@@ -15,6 +15,6 @@
 	[DisplayMessage] VARCHAR(MAX) NULL,
     [Message] VARCHAR(MAX) NULL,
 	[ExceptionType] VARCHAR(MAX) NULL,
-	[ExceptionDetail] XML NULL, 
+	[ExceptionDetail] XML NULL
     
 )

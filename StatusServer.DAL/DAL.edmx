@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DAL.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Environments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="HealthCheckUrl" Type="varchar" MaxLength="500" />
+          <Property Name="DisplayColor" Type="char" MaxLength="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ErrorObjectStates">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+            <PropertyRef Name="ObjectStatesId" />
+          </Key>
+          <Property Name="ErrorId" Type="int" Nullable="false" />
+          <Property Name="ObjectStatesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Errors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="Handled" Type="bit" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="EnvironmentId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="500" />
+          <Property Name="LineNumber" Type="int" />
+          <Property Name="MemberName" Type="varchar" MaxLength="500" />
+          <Property Name="DisplayMessage" Type="varchar(max)" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="ExceptionType" Type="varchar(max)" />
+          <Property Name="ExceptionDetail" Type="xml" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ObjectStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ClassName" Type="varchar" MaxLength="200" />
+          <Property Name="InstanceName" Type="varchar" MaxLength="200" />
+          <Property Name="Data" Type="varchar(max)" Nullable="false" />
+          <Property Name="Format" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Environme__Appli__1920BF5C">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Environments" Type="Self.Environments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Environments">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ErrorObje__Error__20C1E124">
+          <End Role="Errors" Type="Self.Errors" Multiplicity="1" />
+          <End Role="ErrorObjectStates" Type="Self.ErrorObjectStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Errors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ErrorObjectStates">
+              <PropertyRef Name="ErrorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ErrorObje__Objec__21B6055D">
+          <End Role="ObjectStates" Type="Self.ObjectStates" Multiplicity="1" />
+          <End Role="ErrorObjectStates" Type="Self.ErrorObjectStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjectStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ErrorObjectStates">
+              <PropertyRef Name="ObjectStatesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Errors__Applicat__1BFD2C07">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Errors" Type="Self.Errors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Errors">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Errors__ModuleId__1CF15040">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+          <End Role="Errors" Type="Self.Errors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Errors">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modules__Applica__1DE57479">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Modules" Type="Self.Modules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Modules">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DALStoreContainer">
+          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Environments" EntityType="Self.Environments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Errors" EntityType="Self.Errors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ObjectStates" EntityType="Self.ObjectStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorObjectStates" EntityType="Self.ErrorObjectStates" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ErrorObjectStates].[ErrorId] AS [ErrorId], 
+    [ErrorObjectStates].[ObjectStatesId] AS [ObjectStatesId]
+    FROM [dbo].[ErrorObjectStates] AS [ErrorObjectStates]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Environme__Appli__1920BF5C" Association="Self.FK__Environme__Appli__1920BF5C">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Environments" EntitySet="Environments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ErrorObje__Error__20C1E124" Association="Self.FK__ErrorObje__Error__20C1E124">
+            <End Role="Errors" EntitySet="Errors" />
+            <End Role="ErrorObjectStates" EntitySet="ErrorObjectStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ErrorObje__Objec__21B6055D" Association="Self.FK__ErrorObje__Objec__21B6055D">
+            <End Role="ObjectStates" EntitySet="ObjectStates" />
+            <End Role="ErrorObjectStates" EntitySet="ErrorObjectStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Errors__Applicat__1BFD2C07" Association="Self.FK__Errors__Applicat__1BFD2C07">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Errors" EntitySet="Errors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Errors__ModuleId__1CF15040" Association="Self.FK__Errors__ModuleId__1CF15040">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Errors" EntitySet="Errors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modules__Applica__1DE57479" Association="Self.FK__Modules__Applica__1DE57479">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Modules" EntitySet="Modules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DAL" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Environments" Relationship="Self.FK__Environme__Appli__1920BF5C" FromRole="Applications" ToRole="Environments" />
+          <NavigationProperty Name="Errors" Relationship="Self.FK__Errors__Applicat__1BFD2C07" FromRole="Applications" ToRole="Errors" />
+          <NavigationProperty Name="Modules" Relationship="Self.FK__Modules__Applica__1DE57479" FromRole="Applications" ToRole="Modules" />
+        </EntityType>
+        <EntityType Name="Environment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HealthCheckUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayColor" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK__Environme__Appli__1920BF5C" FromRole="Environments" ToRole="Applications" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Handled" Type="Boolean" Nullable="false" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="EnvironmentId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LineNumber" Type="Int32" />
+          <Property Name="MemberName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ExceptionType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ExceptionDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="Self.FK__Errors__Applicat__1BFD2C07" FromRole="Errors" ToRole="Applications" />
+          <NavigationProperty Name="Module" Relationship="Self.FK__Errors__ModuleId__1CF15040" FromRole="Errors" ToRole="Modules" />
+          <NavigationProperty Name="ObjectStates" Relationship="DAL.ErrorObjectStates" FromRole="Error" ToRole="ObjectState" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK__Modules__Applica__1DE57479" FromRole="Modules" ToRole="Applications" />
+          <NavigationProperty Name="Errors" Relationship="Self.FK__Errors__ModuleId__1CF15040" FromRole="Modules" ToRole="Errors" />
+        </EntityType>
+        <EntityType Name="ObjectState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="InstanceName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Errors" Relationship="DAL.ErrorObjectStates" FromRole="ObjectState" ToRole="Error" />
+        </EntityType>
+        <Association Name="FK__Environme__Appli__1920BF5C">
+          <End Role="Applications" Type="Self.Application" Multiplicity="1" />
+          <End Role="Environments" Type="Self.Environment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Environments">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Errors__Applicat__1BFD2C07">
+          <End Role="Applications" Type="Self.Application" Multiplicity="1" />
+          <End Role="Errors" Type="Self.Error" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Errors">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modules__Applica__1DE57479">
+          <End Role="Applications" Type="Self.Application" Multiplicity="1" />
+          <End Role="Modules" Type="Self.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Modules">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Errors__ModuleId__1CF15040">
+          <End Role="Modules" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="Errors" Type="Self.Error" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Errors">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StatusServerEntities" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <EntitySet Name="Environments" EntityType="Self.Environment" />
+          <EntitySet Name="Errors" EntityType="Self.Error" />
+          <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="ObjectStates" EntityType="Self.ObjectState" />
+          <AssociationSet Name="FK__Environme__Appli__1920BF5C" Association="Self.FK__Environme__Appli__1920BF5C">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Environments" EntitySet="Environments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Errors__Applicat__1BFD2C07" Association="Self.FK__Errors__Applicat__1BFD2C07">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Errors" EntitySet="Errors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modules__Applica__1DE57479" Association="Self.FK__Modules__Applica__1DE57479">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Modules" EntitySet="Modules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Errors__ModuleId__1CF15040" Association="Self.FK__Errors__ModuleId__1CF15040">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Errors" EntitySet="Errors" />
+          </AssociationSet>
+          <AssociationSet Name="ErrorObjectStates" Association="DAL.ErrorObjectStates">
+            <End Role="Error" EntitySet="Errors" />
+            <End Role="ObjectState" EntitySet="ObjectStates" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="ErrorObjectStates">
+          <End Type="DAL.Error" Role="Error" Multiplicity="*" />
+          <End Type="DAL.ObjectState" Role="ObjectState" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DALStoreContainer" CdmEntityContainer="StatusServerEntities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="DAL.Application">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Environments">
+            <EntityTypeMapping TypeName="DAL.Environment">
+              <MappingFragment StoreEntitySet="Environments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="HealthCheckUrl" ColumnName="HealthCheckUrl" />
+                <ScalarProperty Name="DisplayColor" ColumnName="DisplayColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Errors">
+            <EntityTypeMapping TypeName="DAL.Error">
+              <MappingFragment StoreEntitySet="Errors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Handled" ColumnName="Handled" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="EnvironmentId" ColumnName="EnvironmentId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LineNumber" ColumnName="LineNumber" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="DisplayMessage" ColumnName="DisplayMessage" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
+                <ScalarProperty Name="ExceptionDetail" ColumnName="ExceptionDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="DAL.Module">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObjectStates">
+            <EntityTypeMapping TypeName="DAL.ObjectState">
+              <MappingFragment StoreEntitySet="ObjectStates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="InstanceName" ColumnName="InstanceName" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ErrorObjectStates" TypeName="DAL.ErrorObjectStates" StoreEntitySet="ErrorObjectStates">
+            <EndProperty Name="ObjectState">
+              <ScalarProperty Name="Id" ColumnName="ObjectStatesId" />
+            </EndProperty>
+            <EndProperty Name="Error">
+              <ScalarProperty Name="Id" ColumnName="ErrorId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
