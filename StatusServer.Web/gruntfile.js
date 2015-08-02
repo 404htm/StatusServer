@@ -25,7 +25,7 @@
 		},
 		watch: {
 			styles: {
-				files: ['css/**/*.less'], // which files to watch
+				files: ['wwwroot/css/styles.less'], // which files to watch
 				tasks: ['less'],
 				options: {
 					nospawn: true
@@ -38,7 +38,9 @@
 
 	grunt.loadNpmTasks("grunt-bower-task");
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask("default", ["bower:install"]);
 	grunt.registerTask('default', ['less']);
+	grunt.registerTask('default', ['watch']);
 };
