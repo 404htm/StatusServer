@@ -5,12 +5,13 @@
     "dependencies": {
         "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
         "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
-         "Microsoft.AspNet.Mvc.Core": "6.0.0-beta5",
+        "Microsoft.AspNet.Mvc.Core": "6.0.0-beta5",
         "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
         "Microsoft.Framework.Configuration": "1.0.0-beta5",
-        "Microsoft.Framework.Configuration.Json":  "1.0.0-beta5",
+        "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
         "bootstrap": "3.3.5",
-        "Microsoft.AspNet.Mvc": "6.0.0-beta5"
+        "Microsoft.AspNet.Mvc": "6.0.0-beta5",
+        "Microsoft.AspNet.SignalR.Client": "2.2.0"
     },
 
     "commands": {
