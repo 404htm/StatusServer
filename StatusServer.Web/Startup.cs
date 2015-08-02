@@ -22,13 +22,20 @@ namespace StatusServer.Web
 		{
 			app.UseMvc();
 			app.UseStaticFiles();
+			
 
 			app.UseMvc(routes =>
 			{
-				routes.MapRoute(
+				routes
+				.MapRoute(
+						name: "fullscreen",
+						template: "fs/{controller}/{action}/{id?}",
+						defaults: new { controller = "Home", action = "Index", fullscreen=true })
+				.MapRoute(
 						name: "default",
 						template: "{controller}/{action}/{id?}",
-						defaults: new { controller = "Home", action = "Index" });
+						defaults: new { controller = "Home", action = "Index", fullscreen=false })
+					;
 			});
 		}
 
