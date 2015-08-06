@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Errors]
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
+	[Token] UNIQUEIDENTIFIER DEFAULT newID() NOT NULL,
 	[Time] DATETIME NOT NULL,
 	[Handled] Bit NOT NULL,
 
@@ -18,3 +19,7 @@
 	[ExceptionDetail] XML NULL
     
 )
+
+GO
+
+CREATE UNIQUE INDEX [IX_Errors_Token] ON [dbo].[Errors] ([Token])
