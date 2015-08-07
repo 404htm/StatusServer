@@ -33,6 +33,7 @@ namespace StatusServer.DAL
         public string Message { get; set; }
         public string ExceptionType { get; set; }
         public string ExceptionDetail { get; set; }
+        public System.Guid Token { get; set; }
     
         public virtual Application Application { get; set; }
         public virtual Module Module { get; set; }

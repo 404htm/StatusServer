@@ -24,8 +24,6 @@
           <Property Name="HealthCheckUrl" Type="varchar" MaxLength="500" />
           <Property Name="DisplayColor" Type="char" MaxLength="7" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ErrorObjectStates">
           <Key>
             <PropertyRef Name="ErrorId" />
@@ -39,6 +37,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Token" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Time" Type="datetime" Nullable="false" />
           <Property Name="Handled" Type="bit" Nullable="false" />
           <Property Name="ApplicationId" Type="int" Nullable="false" />
@@ -84,7 +83,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ErrorObje__Error__20C1E124">
+        <Association Name="FK__ErrorObje__Error__38996AB5">
           <End Role="Errors" Type="Self.Errors" Multiplicity="1" />
           <End Role="ErrorObjectStates" Type="Self.ErrorObjectStates" Multiplicity="*" />
           <ReferentialConstraint>
@@ -108,7 +107,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Errors__Applicat__1BFD2C07">
+        <Association Name="FK__Errors__Applicat__398D8EEE">
           <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
           <End Role="Errors" Type="Self.Errors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -120,7 +119,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Errors__ModuleId__1CF15040">
+        <Association Name="FK__Errors__ModuleId__3A81B327">
           <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
           <End Role="Errors" Type="Self.Errors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -147,20 +146,15 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
         <EntityContainer Name="DALStoreContainer">
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Environments" EntityType="Self.Environments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorObjectStates" EntityType="Self.ErrorObjectStates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Errors" EntityType="Self.Errors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ObjectStates" EntityType="Self.ObjectStates" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ErrorObjectStates" EntityType="Self.ErrorObjectStates" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ErrorObjectStates].[ErrorId] AS [ErrorId], 
-    [ErrorObjectStates].[ObjectStatesId] AS [ObjectStatesId]
-    FROM [dbo].[ErrorObjectStates] AS [ErrorObjectStates]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Environme__Appli__1920BF5C" Association="Self.FK__Environme__Appli__1920BF5C">
             <End Role="Applications" EntitySet="Applications" />
             <End Role="Environments" EntitySet="Environments" />
           </AssociationSet>
-          <AssociationSet Name="FK__ErrorObje__Error__20C1E124" Association="Self.FK__ErrorObje__Error__20C1E124">
+          <AssociationSet Name="FK__ErrorObje__Error__38996AB5" Association="Self.FK__ErrorObje__Error__38996AB5">
             <End Role="Errors" EntitySet="Errors" />
             <End Role="ErrorObjectStates" EntitySet="ErrorObjectStates" />
           </AssociationSet>
@@ -168,11 +162,11 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
             <End Role="ObjectStates" EntitySet="ObjectStates" />
             <End Role="ErrorObjectStates" EntitySet="ErrorObjectStates" />
           </AssociationSet>
-          <AssociationSet Name="FK__Errors__Applicat__1BFD2C07" Association="Self.FK__Errors__Applicat__1BFD2C07">
+          <AssociationSet Name="FK__Errors__Applicat__398D8EEE" Association="Self.FK__Errors__Applicat__398D8EEE">
             <End Role="Applications" EntitySet="Applications" />
             <End Role="Errors" EntitySet="Errors" />
           </AssociationSet>
-          <AssociationSet Name="FK__Errors__ModuleId__1CF15040" Association="Self.FK__Errors__ModuleId__1CF15040">
+          <AssociationSet Name="FK__Errors__ModuleId__3A81B327" Association="Self.FK__Errors__ModuleId__3A81B327">
             <End Role="Modules" EntitySet="Modules" />
             <End Role="Errors" EntitySet="Errors" />
           </AssociationSet>
@@ -228,6 +222,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
           <NavigationProperty Name="Application" Relationship="Self.FK__Errors__Applicat__1BFD2C07" FromRole="Errors" ToRole="Applications" />
           <NavigationProperty Name="Module" Relationship="Self.FK__Errors__ModuleId__1CF15040" FromRole="Errors" ToRole="Modules" />
           <NavigationProperty Name="ObjectStates" Relationship="DAL.ErrorObjectStates" FromRole="Error" ToRole="ObjectState" />
+          <Property Name="Token" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -300,7 +295,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="StatusServerEntities" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+        <EntityContainer Name="Context" annotation:LazyLoadingEnabled="false" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="Applications" EntityType="Self.Application" />
           <EntitySet Name="Environments" EntityType="Self.Environment" />
           <EntitySet Name="Errors" EntityType="Self.Error" />
@@ -336,7 +331,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DALStoreContainer" CdmEntityContainer="StatusServerEntities">
+        <EntityContainerMapping StorageEntityContainer="DALStoreContainer" CdmEntityContainer="Context">
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="DAL.Application">
               <MappingFragment StoreEntitySet="Applications">
@@ -361,6 +356,7 @@ warning 6002: The table/view 'StatusServer.dbo.ErrorObjectStates' does not have 
           <EntitySetMapping Name="Errors">
             <EntityTypeMapping TypeName="DAL.Error">
               <MappingFragment StoreEntitySet="Errors">
+                <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Handled" ColumnName="Handled" />

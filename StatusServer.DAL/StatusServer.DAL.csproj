@@ -75,6 +75,7 @@
     <Compile Include="Error.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="ErrorRepository.cs" />
     <Compile Include="Module.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>

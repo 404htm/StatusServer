@@ -13,10 +13,10 @@ namespace StatusServer.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    internal partial class StatusServerEntities : DbContext
+    internal partial class Context : DbContext
     {
-        public StatusServerEntities()
-            : base("name=StatusServerEntities")
+        public Context()
+            : base("name=Context")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
