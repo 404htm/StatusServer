@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using StatusServer.DAL;
 
 
 
@@ -12,10 +13,12 @@ namespace StatusServer.Web.Controllers
     public class ErrorLogController : Controller
     {
 
-		[HttpPost("{id}")]
-		public void RecordError(int id, [FromBody]string value)
+		[HttpPost()]
+		public void RecordError(int project, string env, [FromBody]Error errorInfo)
 		{
-		}
+			var dal = new DAL.ErrorRepository();
+			dal.RecordError(errorInfo);
+        }
 
 
 		// GET: api/values
