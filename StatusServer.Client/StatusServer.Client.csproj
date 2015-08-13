@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorLogger.cs" />
-    <Compile Include="ErrorReporter.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="ErrorAggregator.cs" />
+    <Compile Include="IErrorLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
