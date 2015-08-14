@@ -15,7 +15,6 @@ namespace StatusServer.Client
 		{
 			_token = token;
 			_logger = logger;
-
 		}
 
 		public ErrorAggregator AddNote(string note, object[] args)

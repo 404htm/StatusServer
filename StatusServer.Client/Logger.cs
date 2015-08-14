@@ -22,7 +22,7 @@ namespace StatusServer.Client
 		{
 			IErrorLogger logger = null;
 			var token = Guid.NewGuid();
-			logger.Log(token, ex, message, filePath, lineNumber);
+			logger.Log(token, ex, message, filePath, memberName, lineNumber);
 
 			return new ErrorAggregator(logger, token);
 		}
