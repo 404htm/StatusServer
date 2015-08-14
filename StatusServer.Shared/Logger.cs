@@ -9,9 +9,11 @@ namespace StatusServer.Shared
 {
     public class Logger
     {
-		private IErrorLogger ErrorLoggerFactory()
+		IErrorLogger _error_logger;
+		public Logger(IErrorLogger errorLogger)
 		{
-			return null;
+			//This constructor is temporary
+			_error_logger = errorLogger;
 		}
 		
 		public ErrorAggregator ReportError
@@ -20,11 +22,9 @@ namespace StatusServer.Shared
 		[CallerFilePath] string filePath = null,
 		[CallerLineNumber] int lineNumber = 0)
 		{
-			IErrorLogger logger = null;
 			var token = Guid.NewGuid();
-			logger.Log(token, ex, message, filePath, memberName, lineNumber);
-
-			return new ErrorAggregator(logger, token);
+			_error_logger.Log(token, ex, message, filePath, memberName, lineNumber);
+			return new ErrorAggregator(_error_logger, token);
 		}
 
 		public void Assert()
