@@ -7,13 +7,17 @@ namespace StatusServer.Shared.Tests
 	public class LoggerTests
 	{
 
-		Logger _logger;
-
 		[TestInitialize]
 		public void Initialize()
 		{
+			
+		}
+
+		[TestMethod]
+		public void ConstructorTest()
+		{
 			var el = new Fakes.StubIErrorLogger();
-			_logger = new Logger(el);
+			var logger = new Logger(el);
 		}
 
 		[TestMethod]
@@ -40,31 +44,55 @@ namespace StatusServer.Shared.Tests
 			var logger = new Logger(el);
 			var result = logger.ReportError(new InvalidCastException(), "This is a test message");
 
+			Assert.IsNotNull(result, "Error aggregator not created");
 			Assert.IsNotNull(_ex);
 			Assert.AreNotEqual(_token, new Guid());
 			Assert.AreEqual(_method, "RecordErrorTest");
 			Assert.AreNotEqual(_line, 0);
 			
 
-			Assert.IsNotNull(result, "Error aggregator not created");
+			
 		}
 
 		[TestMethod]
 		public void RecordObjectTest()
 		{
-			
+			Guid _token1 = new Guid(), _token2 = new Guid();
+			Object _obj = null;
+			string _name = null;
 
-			
+
+			var el = new Fakes.StubIErrorLogger
+			{
+				LogGuidExceptionStringStringStringInt32 = (token, ex, message, file, method, line) =>
+				{
+					_token1 = token;
+				},
+				AddObjectStateGuidObjectStringInt32 = (token, obj, name, depth)  =>
+				{
+					_token2 = token;
+					_obj = obj;
+					_name = name;
+				}
+			};
+
+			var logger = new Logger(el);
 
 
-            var testObj1 = "This is a string";
+			var testobj1 = "This is a string";
 
 			var result =
-				_logger
+				logger
 				.ReportError(new InvalidCastException(), "This method tests the object writer")
-				.IncludeObject("testObj1", testObj1);
+				.IncludeObject("testObj1", testobj1);
 
-			Assert.IsNotNull(result);
+			Assert.AreNotEqual(_token1, new Guid());
+			Assert.AreEqual(_token1, _token2);
+			Assert.AreEqual("testObj1", testobj1);
+			Assert.IsNotNull(_obj);
+			Assert.IsNotNull(result, "Error aggregator not created");
+
+			//result.IncludeObject("testObj2");
 		}
 	}
 }
