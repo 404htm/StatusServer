@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StatusServer.Client
+namespace StatusServer.Shared
 {
 	public class ErrorAggregator
 	{
