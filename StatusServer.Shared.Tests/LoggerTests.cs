@@ -16,7 +16,7 @@ namespace StatusServer.Shared.Tests
 		[TestMethod]
 		public void ConstructorTest()
 		{
-			var el = new Fakes.StubIErrorLogger();
+			var el = new Fakes.StubIErrorRecorder();
 			var logger = new Logger(el);
 		}
 
@@ -28,7 +28,7 @@ namespace StatusServer.Shared.Tests
 			string _message, _file, _method = null;
 			int _line = 0;
 
-			var el = new Fakes.StubIErrorLogger
+			var el = new Fakes.StubIErrorRecorder
 			{
 				LogGuidExceptionStringStringStringInt32 = (token, ex, message, file, method, line) =>
 				{
@@ -49,9 +49,6 @@ namespace StatusServer.Shared.Tests
 			Assert.AreNotEqual(_token, new Guid());
 			Assert.AreEqual(_method, "RecordErrorTest");
 			Assert.AreNotEqual(_line, 0);
-			
-
-			
 		}
 
 		[TestMethod]
@@ -62,7 +59,7 @@ namespace StatusServer.Shared.Tests
 			string _name = null;
 
 
-			var el = new Fakes.StubIErrorLogger
+			var el = new Fakes.StubIErrorRecorder
 			{
 				LogGuidExceptionStringStringStringInt32 = (token, ex, message, file, method, line) =>
 				{
@@ -91,8 +88,6 @@ namespace StatusServer.Shared.Tests
 			Assert.AreEqual("testObj1", testobj1);
 			Assert.IsNotNull(_obj);
 			Assert.IsNotNull(result, "Error aggregator not created");
-
-			//result.IncludeObject("testObj2");
 		}
 	}
 }

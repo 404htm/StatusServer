@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StatusServer.Shared
 {
-	public interface IErrorLogger
+	public interface IErrorRecorder
 	{
         void Log(Exception e, string message);
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StatusServer.DAL
 {
-	public class DBErrorLogger : IErrorLogger
+	public class DBErrorLogger : IErrorRecorder
 	{
 		public void AddFile(string filename, byte[] data)
 		{

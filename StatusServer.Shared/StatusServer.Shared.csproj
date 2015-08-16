@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorAggregator.cs" />
+    <Compile Include="Helpers\ObjectMapper.cs" />
     <Compile Include="IErrorDetails.cs" />
     <Compile Include="IErrorLogger.cs" />
     <Compile Include="Logger.cs" />

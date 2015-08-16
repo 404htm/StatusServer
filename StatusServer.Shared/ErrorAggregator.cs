@@ -9,9 +9,9 @@ namespace StatusServer.Shared
 	public class ErrorAggregator
 	{
 		Guid _token;
-		IErrorLogger _logger;
+		IErrorRecorder _logger;
 
-		internal ErrorAggregator(IErrorLogger logger, Guid token)
+		internal ErrorAggregator(IErrorRecorder logger, Guid token)
 		{
 			_token = token;
 			_logger = logger;

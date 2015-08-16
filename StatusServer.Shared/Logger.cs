@@ -9,8 +9,8 @@ namespace StatusServer.Shared
 {
     public class Logger
     {
-		IErrorLogger _error_logger;
-		public Logger(IErrorLogger errorLogger)
+		IErrorRecorder _error_logger;
+		public Logger(IErrorRecorder errorLogger)
 		{
 			//This constructor is temporary
 			_error_logger = errorLogger;
