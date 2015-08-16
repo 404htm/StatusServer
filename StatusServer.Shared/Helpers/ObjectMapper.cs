@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Web.Script.Serialization;
+using System.Web.Script.Serialization;
+
 
 namespace StatusServer.Shared.Helpers
 {
-	public static class ObjectMapper
+	
+	internal static class ObjectMapper
 	{
-		//public MapObjectToXML()
+		public static string ToJsonString(Object obj, int depth)
+		{
+			var jss = new JavaScriptSerializer();
+			jss.RecursionLimit = depth;
+			return jss.Serialize(obj);
+		}
+
+
 	}
 }
