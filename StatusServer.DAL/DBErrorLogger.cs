@@ -14,7 +14,7 @@ namespace StatusServer.DAL
 			throw new NotImplementedException();
 		}
 
-		public void AddObjectState(Guid token, object @object, string name, int depth = 1)
+		public void AddObjectState(Guid token, string object_data, string name, string format)
 		{
 			throw new NotImplementedException();
 		}

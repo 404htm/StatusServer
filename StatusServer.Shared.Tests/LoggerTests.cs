@@ -65,7 +65,7 @@ namespace StatusServer.Shared.Tests
 				{
 					_token1 = token;
 				},
-				AddObjectStateGuidObjectStringInt32 = (token, obj, name, depth)  =>
+				AddObjectStateGuidStringStringString= (token, obj, name, format)  =>
 				{
 					_token2 = token;
 					_obj = obj;

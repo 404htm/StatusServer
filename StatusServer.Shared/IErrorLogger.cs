@@ -16,7 +16,7 @@ namespace StatusServer.Shared
 
 		void Log(Guid token, Exception e, string message, string caller_file_name, string caller_member_name, int line_number);
 
-		void AddObjectState(Guid token, Object @object, string name, int depth = 1);
+		void AddObjectState(Guid token, string @object_data, string name, string format);
 
 		void AddFile(string filename, byte[] data);
 
