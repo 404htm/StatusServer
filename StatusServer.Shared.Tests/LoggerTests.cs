@@ -26,11 +26,11 @@ namespace StatusServer.Shared.Tests
 			Guid _token = new Guid();
 			Exception _ex = null;
 			string _message, _file, _method = null;
-			int _line = 0;
+			int? _line = null;
 
 			var el = new Fakes.StubIErrorRecorder
 			{
-				LogGuidExceptionStringStringStringInt32 = (token, ex, message, file, method, line) =>
+				LogGuidExceptionStringStringStringNullableOfInt32 = (token, ex, message, file, method, line) =>
 				{
 					_token = token;
 					_ex = ex;
@@ -48,7 +48,7 @@ namespace StatusServer.Shared.Tests
 			Assert.IsNotNull(_ex);
 			Assert.AreNotEqual(_token, new Guid());
 			Assert.AreEqual(_method, "RecordErrorTest");
-			Assert.AreNotEqual(_line, 0);
+			Assert.AreNotEqual(_line, null);
 		}
 
 		[TestMethod]
@@ -61,7 +61,7 @@ namespace StatusServer.Shared.Tests
 
 			var el = new Fakes.StubIErrorRecorder
 			{
-				LogGuidExceptionStringStringStringInt32 = (token, ex, message, file, method, line) =>
+				LogGuidExceptionStringStringStringNullableOfInt32 = (token, ex, message, file, method, line) =>
 				{
 					_token1 = token;
 				},

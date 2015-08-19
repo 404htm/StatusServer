@@ -72,7 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DAL.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DBErrorLogger.cs" />
+    <Compile Include="DBErrorRecorder.cs" />
     <Compile Include="Environment.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
