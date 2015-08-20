@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusServer.Client.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusServer.Shared.Tests", "StatusServer.Shared.Tests\StatusServer.Shared.Tests.csproj", "{26B4E11F-12BF-4F33-83D4-E18A1C5D4B63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusServer.DAL.Tests", "StatusServer.DAL.Tests\StatusServer.DAL.Tests.csproj", "{893D4D21-BA1D-44A7-99D4-A15FC4F682BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{26B4E11F-12BF-4F33-83D4-E18A1C5D4B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26B4E11F-12BF-4F33-83D4-E18A1C5D4B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26B4E11F-12BF-4F33-83D4-E18A1C5D4B63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{893D4D21-BA1D-44A7-99D4-A15FC4F682BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{893D4D21-BA1D-44A7-99D4-A15FC4F682BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{893D4D21-BA1D-44A7-99D4-A15FC4F682BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{893D4D21-BA1D-44A7-99D4-A15FC4F682BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +68,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{577C494A-D08A-4ED2-BA32-1151F12AF3EE} = {D1322FEF-8122-448F-AB72-9F2201E77B70}
 		{26B4E11F-12BF-4F33-83D4-E18A1C5D4B63} = {D1322FEF-8122-448F-AB72-9F2201E77B70}
+		{893D4D21-BA1D-44A7-99D4-A15FC4F682BA} = {D1322FEF-8122-448F-AB72-9F2201E77B70}
 	EndGlobalSection
 EndGlobal
