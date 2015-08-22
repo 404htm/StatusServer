@@ -7,8 +7,15 @@ namespace StatusServer.DAL.Tests
 	public class DBErrorRecorderTests
 	{
 		[TestMethod]
-		public void Log_exception_message()
+		public void GetContext()
 		{
+			var context = ContextFactory.GetContext();
+			Assert.IsNotNull(context);
+		}
+
+		[TestMethod]
+		public void Log_exception_message()
+		{ 
 			var logger = new DBErrorRecorder();
 			var token = Guid.NewGuid();
 

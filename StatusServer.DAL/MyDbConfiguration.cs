@@ -16,7 +16,7 @@ namespace StatusServer.DAL
 			//var ds = (DataSet)ConfigurationManager.GetSection("system.data");
 			SetExecutionStrategy("System.Data.SqlClient", () => new SqlAzureExecutionStrategy());
 			SetDefaultConnectionFactory(new LocalDbConnectionFactory("v11.0"));
-			
+			//SetProviderFactory("System.Data.EntityClient")
 			
 		}
 	}
