@@ -53,6 +53,7 @@ namespace StatusServer.DAL
 			using (var dc = ContextFactory.GetContext())
 			{
 				var error = new Error();
+				error.Time = DateTime.UtcNow;
 				error.Token = token;
 				error.ExceptionDetail = e.ToString();
 				error.Message = message;
