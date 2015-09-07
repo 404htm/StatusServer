@@ -10,9 +10,12 @@ namespace StatusServer.Shared
     public class Logger
     {
 		IErrorRecorder _error_logger;
-		public Logger(IErrorRecorder errorLogger)
+		int _app_id;
+
+		public Logger(IErrorRecorder errorLogger, int appId)
 		{
 			//This constructor is temporary
+			_app_id = appId;
 			_error_logger = errorLogger;
 		}
 		
@@ -23,7 +26,7 @@ namespace StatusServer.Shared
 		[CallerLineNumber] int lineNumber = 0)
 		{
 			var token = Guid.NewGuid();
-			_error_logger.Log(token, ex, message, filePath, memberName, lineNumber);
+			_error_logger.Log(_app_id, token, ex, message, filePath, memberName, lineNumber);
 			return new ErrorAggregator(_error_logger, token);
 		}
 

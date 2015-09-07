@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 
 namespace StatusServer.Shared.Helpers
@@ -13,9 +14,8 @@ namespace StatusServer.Shared.Helpers
 	{
 		public static string ToJsonString(Object obj, int depth)
 		{
-			var jss = new JavaScriptSerializer();
-			jss.RecursionLimit = depth;
-			return jss.Serialize(obj);
+			var settings = new JsonSerializerSettings { MaxDepth = depth };
+			return JsonConvert.SerializeObject(obj, Formatting.Indented, settings);
 		}
 
 

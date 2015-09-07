@@ -6,6 +6,8 @@ namespace StatusServer.DAL.Tests
 	[TestClass]
 	public class DBErrorRecorderTests
 	{
+		const int TEST_APPLICATION = 1;
+
 		[TestMethod]
 		public void GetContext()
 		{
@@ -19,7 +21,7 @@ namespace StatusServer.DAL.Tests
 			var logger = new DBErrorRecorder();
 			var token = Guid.NewGuid();
 
-			logger.Log(token, new InvalidCastException(), "Test Exception");
+			logger.Log(TEST_APPLICATION, token, new InvalidCastException(), "Test Exception");
 
 
 		}

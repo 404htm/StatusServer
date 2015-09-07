@@ -6,6 +6,7 @@ namespace StatusServer.Shared.Tests
 	[TestClass]
 	public class LoggerTests
 	{
+		const int TEST_APPLICATION = 1;
 
 		[TestInitialize]
 		public void Initialize()
@@ -17,7 +18,7 @@ namespace StatusServer.Shared.Tests
 		public void ConstructorTest()
 		{
 			var el = new Fakes.StubIErrorRecorder();
-			var logger = new Logger(el);
+			var logger = new Logger(el, TEST_APPLICATION);
 		}
 
 		[TestMethod]
@@ -30,7 +31,7 @@ namespace StatusServer.Shared.Tests
 
 			var el = new Fakes.StubIErrorRecorder
 			{
-				LogGuidExceptionStringStringStringNullableOfInt32 = (token, ex, message, file, method, line) =>
+				LogInt32GuidExceptionStringStringStringNullableOfInt32= (appId, token, ex, message, file, method, line) =>
 				{
 					_token = token;
 					_ex = ex;
@@ -41,7 +42,7 @@ namespace StatusServer.Shared.Tests
 				}
 			};
 
-			var logger = new Logger(el);
+			var logger = new Logger(el, TEST_APPLICATION);
 			var result = logger.ReportError(new InvalidCastException(), "This is a test message");
 
 			Assert.IsNotNull(result, "Error aggregator not created");
@@ -61,7 +62,7 @@ namespace StatusServer.Shared.Tests
 
 			var el = new Fakes.StubIErrorRecorder
 			{
-				LogGuidExceptionStringStringStringNullableOfInt32 = (token, ex, message, file, method, line) =>
+				LogInt32GuidExceptionStringStringStringNullableOfInt32 = (appId, token, ex, message, file, method, line) =>
 				{
 					_token1 = token;
 				},
@@ -73,7 +74,7 @@ namespace StatusServer.Shared.Tests
 				}
 			};
 
-			var logger = new Logger(el);
+			var logger = new Logger(el, TEST_APPLICATION);
 
 
 			var testobj1 = "This is a string";

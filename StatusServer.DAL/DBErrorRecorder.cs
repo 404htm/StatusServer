@@ -9,9 +9,10 @@ namespace StatusServer.DAL
 {
 	public class DBErrorRecorder : IErrorRecorder
 	{
+
+
 		internal DBErrorRecorder()
 		{
-			
 		}
 
 		public void AddFile(Guid token, string filename, byte[] data)
@@ -33,26 +34,27 @@ namespace StatusServer.DAL
 			}
 		}
 
-		public void Log(Exception e, string message)
+		public void Log(int appId, Exception e, string message)
 		{
-			Log(Guid.NewGuid(), e, message, null, null, null);
+			Log(appId, Guid.NewGuid(), e, message, null, null, null);
 		}
 
-		public void Log(Guid token, Exception e, string message)
+		public void Log(int appId, Guid token, Exception e, string message)
 		{
-			Log(token, e, message, null, null, null);
+			Log(appId, token, e, message, null, null, null);
 		}
 
-		public void Log(Exception e, string message, string caller_file_name, string caller_member_name, int? line_number)
+		public void Log(int appId, Exception e, string message, string caller_file_name, string caller_member_name, int? line_number)
 		{
-			Log(Guid.NewGuid(), e, message, caller_file_name, caller_member_name, line_number);
+			Log(appId, Guid.NewGuid(), e, message, caller_file_name, caller_member_name, line_number);
 		}
 
-		public void Log(Guid token, Exception e, string message, string caller_file_name, string caller_member_name, int? line_number)
+		public void Log(int appId, Guid token, Exception e, string message, string caller_file_name, string caller_member_name, int? line_number)
 		{
 			using (var dc = ContextFactory.GetContext())
 			{
 				var error = new Error();
+				error.ApplicationId = appId;
 				error.Time = DateTime.UtcNow;
 				error.Token = token;
 				error.ExceptionDetail = e.ToString();

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Errors]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY Identity, 
 	[Token] UNIQUEIDENTIFIER DEFAULT newID() NOT NULL,
 	[Time] DATETIME NOT NULL,
 	[Handled] Bit NOT NULL,

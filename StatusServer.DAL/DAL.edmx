@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Token" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Time" Type="datetime" Nullable="false" />
           <Property Name="Handled" Type="bit" Nullable="false" />
@@ -83,7 +83,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ErrorObje__Error__38996AB5">
+        <Association Name="FK__ErrorObje__Error__4AB81AF0">
           <End Role="Errors" Type="Self.Errors" Multiplicity="1" />
           <End Role="ErrorObjectStates" Type="Self.ErrorObjectStates" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,7 +107,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Errors__Applicat__398D8EEE">
+        <Association Name="FK__Errors__Applicat__4BAC3F29">
           <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
           <End Role="Errors" Type="Self.Errors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +119,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Errors__ModuleId__3A81B327">
+        <Association Name="FK__Errors__ModuleId__4CA06362">
           <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
           <End Role="Errors" Type="Self.Errors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +154,7 @@
             <End Role="Applications" EntitySet="Applications" />
             <End Role="Environments" EntitySet="Environments" />
           </AssociationSet>
-          <AssociationSet Name="FK__ErrorObje__Error__38996AB5" Association="Self.FK__ErrorObje__Error__38996AB5">
+          <AssociationSet Name="FK__ErrorObje__Error__4AB81AF0" Association="Self.FK__ErrorObje__Error__4AB81AF0">
             <End Role="Errors" EntitySet="Errors" />
             <End Role="ErrorObjectStates" EntitySet="ErrorObjectStates" />
           </AssociationSet>
@@ -162,11 +162,11 @@
             <End Role="ObjectStates" EntitySet="ObjectStates" />
             <End Role="ErrorObjectStates" EntitySet="ErrorObjectStates" />
           </AssociationSet>
-          <AssociationSet Name="FK__Errors__Applicat__398D8EEE" Association="Self.FK__Errors__Applicat__398D8EEE">
+          <AssociationSet Name="FK__Errors__Applicat__4BAC3F29" Association="Self.FK__Errors__Applicat__4BAC3F29">
             <End Role="Applications" EntitySet="Applications" />
             <End Role="Errors" EntitySet="Errors" />
           </AssociationSet>
-          <AssociationSet Name="FK__Errors__ModuleId__3A81B327" Association="Self.FK__Errors__ModuleId__3A81B327">
+          <AssociationSet Name="FK__Errors__ModuleId__4CA06362" Association="Self.FK__Errors__ModuleId__4CA06362">
             <End Role="Modules" EntitySet="Modules" />
             <End Role="Errors" EntitySet="Errors" />
           </AssociationSet>
