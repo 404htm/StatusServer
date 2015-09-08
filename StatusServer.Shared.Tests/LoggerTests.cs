@@ -84,10 +84,9 @@ namespace StatusServer.Shared.Tests
 				.ReportError(new InvalidCastException(), "This method tests the object writer")
 				.IncludeObject("testObj1", testobj1);
 
-			Assert.AreNotEqual(_token1, new Guid());
-			Assert.AreEqual(_token1, _token2);
-			Assert.AreEqual("testObj1", testobj1);
-			Assert.IsNotNull(_obj);
+			Assert.AreNotEqual(_token1, new Guid(), "Token ID was not recorded correctly");
+			Assert.AreEqual(_token1, _token2, "Token ID did not match original report");
+			Assert.AreEqual(testobj1, _obj, "Object does not match");
 			Assert.IsNotNull(result, "Error aggregator not created");
 		}
 	}

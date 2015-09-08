@@ -18,6 +18,7 @@ namespace StatusServer.Shared.Helpers
 			return JsonConvert.SerializeObject(obj, Formatting.Indented, settings);
 		}
 
+		public static string ToXMLString()
 
 	}
 }

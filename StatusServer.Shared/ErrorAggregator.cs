@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StatusServer.Shared.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,10 @@ namespace StatusServer.Shared
 			return this;
 		}
 
-		public ErrorAggregator IncludeObject(string variableName, Object @object, int depths = 0, string description = null)
+		public ErrorAggregator IncludeObject(string variableName, Object @object, int depth = 1, string description = null)
 		{
-
+			var ser = ObjectMapper.ToJsonString(@object, depth);
+			_logger.AddObjectState(_token, ser, variableName, "json");
 			return this;
 		}
 
