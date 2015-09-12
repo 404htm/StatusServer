@@ -1,11 +1,11 @@
-﻿CREATE TABLE [dbo].[Errors]
+﻿CREATE TABLE [dbo].[Error]
 (
 	[Id] INT NOT NULL PRIMARY KEY Identity, 
 	[Token] UNIQUEIDENTIFIER DEFAULT newID() NOT NULL,
 	[Time] DATETIME NOT NULL,
 	[Handled] Bit NOT NULL,
 
-	[ApplicationId] INT NOT NULL FOREIGN KEY REFERENCES [Applications](Id),
+	[ApplicationId] INT NOT NULL FOREIGN KEY REFERENCES [Application](Id),
 	[EnvironmentId] INT NOT NULL,
 	[ModuleId] INT FOREIGN KEY REFERENCES [Modules](Id),
 	[UserName] VARCHAR(500) NULL,
@@ -22,4 +22,4 @@
 
 GO
 
-CREATE UNIQUE INDEX [IX_Errors_Token] ON [dbo].[Errors] ([Token])
+CREATE UNIQUE INDEX [IX_Errors_Token] ON [dbo].[Error] ([Token])

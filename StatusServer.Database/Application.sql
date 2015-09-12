@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Applications]
+﻿CREATE TABLE [dbo].[Application]
 (
 	[Id] INT NOT NULL PRIMARY KEY Identity,
 	[Name] Varchar(100),

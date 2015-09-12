@@ -74,18 +74,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DAL.edmx</DependentUpon>
     </Compile>
-    <Compile Include="MyDbConfiguration.cs" />
-    <Compile Include="DBErrorRecorder.cs" />
     <Compile Include="Environment.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
     <Compile Include="Error.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
-    <Compile Include="ErrorRepository.cs" />
     <Compile Include="Module.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyDbConfiguration.cs" />
+    <Compile Include="DBErrorRecorder.cs" />
+    <Compile Include="ErrorRepository.cs" />
     <Compile Include="ObjectState.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>

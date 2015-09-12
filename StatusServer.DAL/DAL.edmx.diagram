@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6a362c6e83a44cea988070d6582f36cd" Name="Diagram1" ShowGrid="true">
-        <EntityTypeShape EntityType="DAL.Application" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DAL.Environment" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DAL.Error" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" FillColor="Red" />
-        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DAL.ObjectState" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
-        <AssociationConnector Association="DAL.FK__Environme__Appli__1920BF5C" ManuallyRouted="false" />
-        <AssociationConnector Association="DAL.FK__Errors__Applicat__1BFD2C07" ManuallyRouted="false" />
-        <AssociationConnector Association="DAL.FK__Modules__Applica__1DE57479" ManuallyRouted="false" />
-        <AssociationConnector Association="DAL.FK__Errors__ModuleId__1CF15040" ManuallyRouted="false" />
-        <AssociationConnector Association="DAL.ErrorObjectStates" />
+      <Diagram DiagramId="6a362c6e83a44cea988070d6582f36cd" Name="Diagram1" ShowGrid="true" ZoomLevel="55">
+        <EntityTypeShape EntityType="DAL.Application" Width="1.5" PointX="0.5" PointY="0.625" />
+        <EntityTypeShape EntityType="DAL.Environment" Width="1.5" PointX="0.625" PointY="4.25" />
+        <EntityTypeShape EntityType="DAL.Error" Width="1.5" PointX="5.25" PointY="0.5" />
+        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="DAL.ObjectState" Width="1.5" PointX="8.125" PointY="0.5" />
+        <AssociationConnector Association="DAL.FK__Environme__Appli__66603565" />
+        <AssociationConnector Association="DAL.FK__Error__Applicati__6754599E" />
+        <AssociationConnector Association="DAL.FK__Modules__Applica__656C112C" />
+        <AssociationConnector Association="DAL.FK__Error__ModuleId__68487DD7" />
+        <AssociationConnector Association="DAL.ErrorObjectState" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

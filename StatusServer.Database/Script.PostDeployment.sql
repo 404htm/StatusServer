@@ -10,9 +10,9 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 GO
-SET IDENTITY_INSERT Applications ON;
+SET IDENTITY_INSERT dbo.[Application] ON;
 
-MERGE INTO Applications AS Target
+MERGE INTO dbo.[Application] AS Target
 USING (VALUES
         (1 , 'Test', 'Used for unit testing, content may be cleaned up automatically'),
         (2 , 'StatusServer', 'Self reporting')
@@ -25,6 +25,6 @@ WHEN NOT MATCHED BY Target THEN
         Insert(Id, Name, Notes)
         Values(Id, Name, Notes)
 OUTPUT $action , Inserted .*, Deleted .*;
-SET IDENTITY_INSERT Applications OFF;
+SET IDENTITY_INSERT dbo.[Application]  OFF;
 GO
 

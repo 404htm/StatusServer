@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ObjectStates]
+﻿CREATE TABLE [dbo].[ObjectState]
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
     [ClassName] VARCHAR(200) NULL, 
