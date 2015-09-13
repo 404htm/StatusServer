@@ -67,6 +67,11 @@
     <Build Include="Error.sql" />
     <Build Include="ObjectState.sql" />
     <Build Include="ErrorObjectState.sql" />
+    <Build Include="Assert.sql" />
+    <Build Include="EventType.sql" />
+    <Build Include="EventTypeGroup.sql" />
+    <Build Include="TraceLog.sql" />
+    <Build Include="ApplicationVersion.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="StatusServer.Database.refactorlog" />

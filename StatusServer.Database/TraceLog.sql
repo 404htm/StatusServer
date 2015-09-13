@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Error]
+﻿CREATE TABLE [dbo].[TraceLog]
 (
 	[Id] INT NOT NULL PRIMARY KEY Identity, 
 	[Token] UNIQUEIDENTIFIER DEFAULT newID() NOT NULL,
@@ -14,16 +14,7 @@
 	[FileName] VARCHAR(1000),
 
 	------------------------------------------
-	--    Exception Specific Properties     --
+	--     TraceLog Specific Properties     --
 	------------------------------------------
-
-	[Handled] Bit NOT NULL,
-	[DisplayMessage] VARCHAR(MAX) NULL,
-    [Message] VARCHAR(MAX) NULL,
-	[ExceptionType] VARCHAR(MAX) NULL,
-	[ExceptionDetail] XML NULL
+	[Message] VARCHAR(1000)
 )
-
-GO
-
-CREATE UNIQUE INDEX [IX_Error_Token] ON [dbo].[Error] ([Token])
