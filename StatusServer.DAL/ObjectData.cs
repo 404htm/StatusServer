@@ -12,29 +12,22 @@ namespace StatusServer.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Module
+    public partial class ObjectData
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Module()
+        public ObjectData()
         {
-            this.AppEventLogs = new HashSet<AppEventLog>();
-            this.ApplicationVersions = new HashSet<ApplicationVersion>();
             this.AssertLogs = new HashSet<AssertLog>();
             this.ErrorLogs = new HashSet<ErrorLog>();
             this.TraceLogs = new HashSet<TraceLog>();
         }
     
         public int Id { get; set; }
-        public int ApplicationId { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Notes { get; set; }
+        public string ClassName { get; set; }
+        public string InstanceName { get; set; }
+        public string Data { get; set; }
+        public string Format { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AppEventLog> AppEventLogs { get; set; }
-        public virtual Application Application { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicationVersion> ApplicationVersions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssertLog> AssertLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

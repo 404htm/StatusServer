@@ -1,14 +1,10 @@
-﻿CREATE TRIGGER [VersionTrigger]
-	ON [dbo].[Error]
-	FOR INSERT
-	AS
-	BEGIN
-		SET NOCOUNT ON
-
-		MERGE INTO [dbo].[ApplicationVersion] AS Target
+﻿CREATE PROCEDURE [dbo].[UpdateVersionTable] @Inserted EventTableType READONLY
+AS
+	MERGE INTO [dbo].[ApplicationVersion] AS Target
 		USING (
 			SELECT [Version], [ApplicationId], [EnvironmentId], [ModuleId]
-			FROM INSERTED
+			FROM @Inserted
+			WHERE [Version] IS NOT NULL
 		) AS Source([VersionNumber], [ApplicationId], [EnvironmentId], [ModuleId])
 		ON (
 			Target.VersionNumber = Source.VersionNumber AND
@@ -21,5 +17,4 @@
 		WHEN NOT MATCHED BY Target THEN
 				Insert([VersionNumber], [ApplicationId], [EnvironmentId], [ModuleId], [FirstEncountered])
 				Values([VersionNumber], [ApplicationId], [EnvironmentId], [ModuleId], GETUTCDATE());
-
-	END
+RETURN 0

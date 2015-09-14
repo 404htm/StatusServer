@@ -12,21 +12,26 @@ namespace StatusServer.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ObjectState
+    public partial class AncillaryData
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ObjectState()
+        public AncillaryData()
         {
-            this.Errors = new HashSet<Error>();
+            this.AssertLogs = new HashSet<AssertLog>();
+            this.ErrorLogs = new HashSet<ErrorLog>();
+            this.TraceLogs = new HashSet<TraceLog>();
         }
     
         public int Id { get; set; }
-        public string ClassName { get; set; }
-        public string InstanceName { get; set; }
-        public string Data { get; set; }
-        public string Format { get; set; }
+        public string Type { get; set; }
+        public string Message { get; set; }
+        public string Content { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Error> Errors { get; set; }
+        public virtual ICollection<AssertLog> AssertLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ErrorLog> ErrorLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TraceLog> TraceLogs { get; set; }
     }
 }

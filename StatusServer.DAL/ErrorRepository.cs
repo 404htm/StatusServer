@@ -8,37 +8,37 @@ namespace StatusServer.DAL
 {
 	public class ErrorRepository
 	{
-		public void RecordError(Error error)
+		public void RecordError(ErrorLog error)
 		{
 			using (var dc = new DAL.Context())
 			{
-				dc.Errors.Add(error);
+				dc.ErrorLogs.Add(error);
 				dc.SaveChanges();
 			}
 
         }
 
-		public void UpdateError(int Id, Error error)
+		public void UpdateError(int Id, ErrorLog error)
 		{
 			using (var dc = new DAL.Context())
 			{
-				dc.Errors.Attach(error);
+				dc.ErrorLogs.Attach(error);
 				dc.Entry(error).State = System.Data.Entity.EntityState.Modified;
 				dc.SaveChanges();
 			}
 
 		}
 
-		public Error ReadError(int Id)
+		public ErrorLog ReadError(int Id)
 		{
 			using (var dc = new DAL.Context())
 			{
-				var result = dc.Errors.Find(Id);
+				var result = dc.ErrorLogs.Find(Id);
 				return result;
 			}
 		}
 
-		public void AddErrorDetail(Guid token, ObjectState item)
+		public void AddErrorDetail(Guid token, ObjectData item)
 		{
 			using (var dc = new DAL.Context())
 			{

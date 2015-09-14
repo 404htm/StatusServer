@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Assert]
+﻿CREATE TABLE [dbo].[ErrorLog]
 (
 	[Id] INT NOT NULL PRIMARY KEY Identity, 
 	[Token] UNIQUEIDENTIFIER DEFAULT newID() NOT NULL,
@@ -15,11 +15,18 @@
 	[FileName] VARCHAR(1000),
 
 	------------------------------------------
-	--      Assert Specific Properties      --
+	--    Exception Specific Properties     --
 	------------------------------------------
 
-	[Condition] VARCHAR(500),
-	[Message] VARCHAR(500)
-
-
+	[Handled] Bit NOT NULL,
+	[DisplayMessage] VARCHAR(MAX) NULL,
+    [Message] VARCHAR(MAX) NULL,
+	[ExceptionType] VARCHAR(MAX) NULL,
+	[ExceptionDetail] XML NULL,
+	CONSTRAINT [FK_ErrorLog_ApplicationVersion] FOREIGN KEY ([Version], [ApplicationId], [EnvironmentId], [ModuleId]) REFERENCES [ApplicationVersion]([VersionNumber], [ApplicationId], [EnvironmentId], [ModuleId])
 )
+
+GO
+
+CREATE UNIQUE INDEX [IX_Error_Token] ON [dbo].[ErrorLog] ([Token])
+

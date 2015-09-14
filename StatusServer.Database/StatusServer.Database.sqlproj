@@ -61,10 +61,21 @@
     <Folder Include="StaticData" />
     <Folder Include="Tables" />
     <Folder Include="Triggers" />
+    <Folder Include="Types" />
+    <Folder Include="StoredProcedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="VersionTrigger.sql" />
     <Build Include="Tables\Application.sql" />
+    <Build Include="Types\EventTableType.sql" />
+    <Build Include="StoredProcedures\UpdateVersionTable.sql" />
+    <Build Include="Tables\AppEventLog.sql" />
+    <Build Include="Triggers\VersionTrigger_Error.sql" />
+    <Build Include="Tables\TraceLogObjectData.sql" />
+    <Build Include="Tables\AssertLogObjectData.sql" />
+    <Build Include="Tables\AncillaryData.sql" />
+    <Build Include="Tables\ErrorLogAncillaryData.sql" />
+    <Build Include="Tables\TraceLogAncillaryData.sql" />
+    <Build Include="Tables\AssertLogAncillaryData.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="StatusServer.Database.refactorlog" />
@@ -80,14 +91,14 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ApplicationVersion.sql" />
-    <Build Include="Tables\Assert.sql" />
+    <Build Include="Tables\AssertLog.sql" />
     <Build Include="Tables\Environment.sql" />
-    <Build Include="Tables\Error.sql" />
-    <Build Include="Tables\ErrorObjectState.sql" />
-    <Build Include="Tables\EventType.sql" />
-    <Build Include="Tables\EventTypeGroup.sql" />
+    <Build Include="Tables\ErrorLog.sql" />
+    <Build Include="Tables\ErrorLogObjectData.sql" />
+    <Build Include="Tables\AppEventType.sql" />
+    <Build Include="Tables\AppEventTypeGroup.sql" />
     <Build Include="Tables\Module.sql" />
-    <Build Include="Tables\ObjectState.sql" />
+    <Build Include="Tables\ObjectData.sql" />
     <Build Include="Tables\TraceLog.sql" />
   </ItemGroup>
 </Project>

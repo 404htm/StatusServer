@@ -14,6 +14,16 @@ namespace StatusServer.DAL
     
     public partial class Environment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Environment()
+        {
+            this.AppEventLogs = new HashSet<AppEventLog>();
+            this.ApplicationVersions = new HashSet<ApplicationVersion>();
+            this.AssertLogs = new HashSet<AssertLog>();
+            this.ErrorLogs = new HashSet<ErrorLog>();
+            this.TraceLogs = new HashSet<TraceLog>();
+        }
+    
         public int Id { get; set; }
         public int ApplicationId { get; set; }
         public string Name { get; set; }
@@ -21,6 +31,16 @@ namespace StatusServer.DAL
         public string HealthCheckUrl { get; set; }
         public string DisplayColor { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppEventLog> AppEventLogs { get; set; }
         public virtual Application Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApplicationVersion> ApplicationVersions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssertLog> AssertLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ErrorLog> ErrorLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TraceLog> TraceLogs { get; set; }
     }
 }

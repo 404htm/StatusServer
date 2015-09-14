@@ -26,10 +26,17 @@ namespace StatusServer.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AncillaryData> AncillaryDatas { get; set; }
+        public virtual DbSet<AppEventLog> AppEventLogs { get; set; }
+        public virtual DbSet<AppEventType> AppEventTypes { get; set; }
+        public virtual DbSet<AppEventTypeGroup> AppEventTypeGroups { get; set; }
         public virtual DbSet<Application> Applications { get; set; }
+        public virtual DbSet<ApplicationVersion> ApplicationVersions { get; set; }
+        public virtual DbSet<AssertLog> AssertLogs { get; set; }
         public virtual DbSet<Environment> Environments { get; set; }
-        public virtual DbSet<Error> Errors { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
-        public virtual DbSet<ObjectState> ObjectStates { get; set; }
+        public virtual DbSet<ObjectData> ObjectDatas { get; set; }
+        public virtual DbSet<TraceLog> TraceLogs { get; set; }
     }
 }

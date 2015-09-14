@@ -12,32 +12,39 @@ namespace StatusServer.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Error
+    public partial class ErrorLog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Error()
+        public ErrorLog()
         {
-            this.ObjectStates = new HashSet<ObjectState>();
+            this.AncillaryDatas = new HashSet<AncillaryData>();
+            this.ObjectDatas = new HashSet<ObjectData>();
         }
     
         public int Id { get; set; }
         public System.Guid Token { get; set; }
         public System.DateTime Time { get; set; }
-        public bool Handled { get; set; }
+        public string UserName { get; set; }
         public int ApplicationId { get; set; }
         public int EnvironmentId { get; set; }
         public Nullable<int> ModuleId { get; set; }
-        public string UserName { get; set; }
+        public string Version { get; set; }
         public Nullable<int> LineNumber { get; set; }
         public string MemberName { get; set; }
+        public string FileName { get; set; }
+        public bool Handled { get; set; }
         public string DisplayMessage { get; set; }
         public string Message { get; set; }
         public string ExceptionType { get; set; }
         public string ExceptionDetail { get; set; }
     
         public virtual Application Application { get; set; }
+        public virtual ApplicationVersion ApplicationVersion { get; set; }
+        public virtual Environment Environment { get; set; }
         public virtual Module Module { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ObjectState> ObjectStates { get; set; }
+        public virtual ICollection<AncillaryData> AncillaryDatas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ObjectData> ObjectDatas { get; set; }
     }
 }

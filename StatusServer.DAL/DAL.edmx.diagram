@@ -5,16 +5,48 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6a362c6e83a44cea988070d6582f36cd" Name="Diagram1" ShowGrid="true" ZoomLevel="55">
-        <EntityTypeShape EntityType="DAL.Application" Width="1.5" PointX="2.75" PointY="0.625" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="DAL.Environment" Width="1.5" PointX="0.5" PointY="0.625" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="DAL.Error" Width="1.5" PointX="0.5" PointY="3.5" />
-        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="5" PointY="0.625" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="DAL.ObjectState" Width="1.5" PointX="0.5" PointY="8.5" />
+        <EntityTypeShape EntityType="DAL.AncillaryData" Width="1.5" PointX="6.875" PointY="13.125" />
+        <EntityTypeShape EntityType="DAL.AppEventLog" Width="1.5" PointX="11.125" PointY="6.125" />
+        <EntityTypeShape EntityType="DAL.AppEventType" Width="1.5" PointX="9.625" PointY="13.125" />
+        <EntityTypeShape EntityType="DAL.AppEventTypeGroup" Width="1.5" PointX="11.625" PointY="13.125" />
+        <EntityTypeShape EntityType="DAL.Application" Width="1.5" PointX="1.875" PointY="1.375" />
+        <EntityTypeShape EntityType="DAL.ApplicationVersion" Width="1.5" PointX="10.25" PointY="0.5" />
+        <EntityTypeShape EntityType="DAL.AssertLog" Width="1.5" PointX="6.25" PointY="6.125" />
+        <EntityTypeShape EntityType="DAL.Environment" Width="1.5" PointX="3.875" PointY="1.375" />
+        <EntityTypeShape EntityType="DAL.ErrorLog" Width="1.5" PointX="3.875" PointY="6.125" />
+        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="5.875" PointY="1.375" />
+        <EntityTypeShape EntityType="DAL.ObjectData" Width="1.5" PointX="13.125" PointY="10.125" />
+        <EntityTypeShape EntityType="DAL.TraceLog" Width="1.5" PointX="8.75" PointY="6.125" />
+        <AssociationConnector Association="DAL.FK__AppEventL__Appli__37703C52" />
+        <AssociationConnector Association="DAL.FK__AppEventL__Envir__3864608B" />
+        <AssociationConnector Association="DAL.FK__AppEventL__Modul__395884C4" />
+        <AssociationConnector Association="DAL.FK_AppEventLog_ApplicationVersion" />
+        <AssociationConnector Association="DAL.FK__AppEventT__Appli__3B40CD36" />
+        <AssociationConnector Association="DAL.FK__AppEventT__Event__3C34F16F" />
+        <AssociationConnector Association="DAL.FK__AppEventT__Appli__3D2915A8" />
+        <AssociationConnector Association="DAL.FK__Applicati__Appli__08B54D69" />
+        <AssociationConnector Association="DAL.FK__AssertLog__Appli__3F115E1A" />
         <AssociationConnector Association="DAL.FK__Environme__Appli__66603565" />
-        <AssociationConnector Association="DAL.FK__Error__Applicati__6754599E" />
+        <AssociationConnector Association="DAL.FK__ErrorLog__Applic__46B27FE2" />
         <AssociationConnector Association="DAL.FK__Modules__Applica__656C112C" />
-        <AssociationConnector Association="DAL.FK__Error__ModuleId__68487DD7" />
-        <AssociationConnector Association="DAL.ErrorObjectState" />
+        <AssociationConnector Association="DAL.FK__TraceLog__Applic__0E6E26BF" />
+        <AssociationConnector Association="DAL.FK__Applicati__Envir__09A971A2" />
+        <AssociationConnector Association="DAL.FK__Applicati__Modul__0A9D95DB" />
+        <AssociationConnector Association="DAL.FK_AssertLog_ApplicationVersion" />
+        <AssociationConnector Association="DAL.FK_ErrorLog_ApplicationVersion" />
+        <AssociationConnector Association="DAL.FK_TraceLog_ApplicationVersion" />
+        <AssociationConnector Association="DAL.FK__AssertLog__Envir__40058253" />
+        <AssociationConnector Association="DAL.FK__AssertLog__Modul__40F9A68C" />
+        <AssociationConnector Association="DAL.FK__ErrorLog__Enviro__47A6A41B" />
+        <AssociationConnector Association="DAL.FK__TraceLog__Enviro__0F624AF8" />
+        <AssociationConnector Association="DAL.FK__ErrorLog__Module__489AC854" />
+        <AssociationConnector Association="DAL.FK__TraceLog__Module__10566F31" />
+        <AssociationConnector Association="DAL.AssertLogAncillaryData" />
+        <AssociationConnector Association="DAL.AssertLogObjectData" />
+        <AssociationConnector Association="DAL.ErrorLogAncillaryData" />
+        <AssociationConnector Association="DAL.ErrorLogObjectData" />
+        <AssociationConnector Association="DAL.TraceLogAncillaryData" />
+        <AssociationConnector Association="DAL.TraceLogObjectData" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

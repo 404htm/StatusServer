@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[TraceLog]
+﻿CREATE TABLE [dbo].[AppEventLog]
 (
 	[Id] INT NOT NULL PRIMARY KEY Identity, 
 	[Token] UNIQUEIDENTIFIER DEFAULT newID() NOT NULL,
@@ -14,9 +14,12 @@
 	[MemberName] VARCHAR(500),
 	[FileName] VARCHAR(1000),
 
+	
 	------------------------------------------
-	--     TraceLog Specific Properties     --
+	--      Event Specific Properties       --
 	------------------------------------------
-	[Message] VARCHAR(1000), 
-    CONSTRAINT [FK_TraceLog_ApplicationVersion] FOREIGN KEY ([Version], [ApplicationId], [EnvironmentId], [ModuleId]) REFERENCES [ApplicationVersion]([VersionNumber], [ApplicationId], [EnvironmentId], [ModuleId])
+
+	[AppEventTypeId] INT NOT NULL FOREIGN KEY REFERENCES dbo.[AppEventLog](Id),
+	[Message] VARCHAR(1000),
+	CONSTRAINT [FK_AppEventLog_ApplicationVersion] FOREIGN KEY ([Version], [ApplicationId], [EnvironmentId], [ModuleId]) REFERENCES [ApplicationVersion]([VersionNumber], [ApplicationId], [EnvironmentId], [ModuleId])
 )

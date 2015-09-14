@@ -17,9 +17,15 @@ namespace StatusServer.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Application()
         {
+            this.AppEventLogs = new HashSet<AppEventLog>();
+            this.AppEventTypes = new HashSet<AppEventType>();
+            this.AppEventTypeGroups = new HashSet<AppEventTypeGroup>();
+            this.ApplicationVersions = new HashSet<ApplicationVersion>();
+            this.AssertLogs = new HashSet<AssertLog>();
             this.Environments = new HashSet<Environment>();
-            this.Errors = new HashSet<Error>();
+            this.ErrorLogs = new HashSet<ErrorLog>();
             this.Modules = new HashSet<Module>();
+            this.TraceLogs = new HashSet<TraceLog>();
         }
     
         public int Id { get; set; }
@@ -27,10 +33,22 @@ namespace StatusServer.DAL
         public string Notes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppEventLog> AppEventLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppEventType> AppEventTypes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppEventTypeGroup> AppEventTypeGroups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApplicationVersion> ApplicationVersions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssertLog> AssertLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Environment> Environments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Error> Errors { get; set; }
+        public virtual ICollection<ErrorLog> ErrorLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Module> Modules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TraceLog> TraceLogs { get; set; }
     }
 }
