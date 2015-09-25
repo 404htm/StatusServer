@@ -98,6 +98,7 @@
     <Compile Include="ErrorLog.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="IAppEventLog.cs" />
     <Compile Include="Module.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
@@ -111,6 +112,10 @@
     <Compile Include="TraceLog.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="_TraceLog.cs" />
+    <Compile Include="_AssertLog.cs" />
+    <Compile Include="_ErrorLog.cs" />
+    <Compile Include="_AppEventLog.cs" />
     <Compile Include="_DAL.Context.cs" />
   </ItemGroup>
   <ItemGroup>

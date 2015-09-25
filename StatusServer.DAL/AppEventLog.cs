@@ -13,7 +13,7 @@ namespace StatusServer.DAL
     using System.Collections.Generic;
     
     public partial class AppEventLog
-    {
+	{
         public int Id { get; set; }
         public System.Guid Token { get; set; }
         public System.DateTime Time { get; set; }
