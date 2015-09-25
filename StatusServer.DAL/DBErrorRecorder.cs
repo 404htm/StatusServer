@@ -28,8 +28,8 @@ namespace StatusServer.DAL
 			using (var dc = ContextFactory.GetContext())
 			{
 				//TODO: Instance Name
-				var obj = new ObjectState() { ClassName = name, Data = object_data, Format = format };
-				dc.Errors.Single(e => e.Token == token).ObjectStates.Add(obj);
+				var obj = new ObjectData() { ClassName = name, Data = object_data, Format = format };
+				dc.ErrorLogs.Single(e => e.Token == token).ObjectDatas.Add(obj);
 				dc.SaveChanges();
 			}
 		}
@@ -53,7 +53,7 @@ namespace StatusServer.DAL
 		{
 			using (var dc = ContextFactory.GetContext())
 			{
-				var error = new Error();
+				var error = new ErrorLog();
 				error.ApplicationId = appId;
 				error.Time = DateTime.UtcNow;
 				error.Token = token;
@@ -63,7 +63,7 @@ namespace StatusServer.DAL
 				//error.Module = caller_file_name;
 				error.LineNumber = line_number;
 
-				dc.Errors.Add(error);
+				dc.ErrorLogs.Add(error);
 				dc.SaveChanges();
             }
 		}

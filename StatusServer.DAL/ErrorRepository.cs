@@ -42,8 +42,8 @@ namespace StatusServer.DAL
 		{
 			using (var dc = new DAL.Context())
 			{
-				var error = dc.Errors.Single(e => e.Token == token);
-				error.ObjectStates.Add(item);
+				var error = dc.ErrorLogs.Single(e => e.Token == token);
+				error.ObjectDatas.Add(item);
 				throw new NotImplementedException();
 			}
 

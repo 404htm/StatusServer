@@ -14,7 +14,7 @@ namespace StatusServer.Web.Controllers
     {
 
 		[HttpPost()]
-		public void RecordError(int project, string env, [FromBody]Error errorInfo)
+		public void RecordError(int project, string env, [FromBody]ErrorLog errorInfo)
 		{
 			var dal = new DAL.ErrorRepository();
 			dal.RecordError(errorInfo);

@@ -209,18 +209,6 @@
           <Property Name="TraceLogId" Type="int" Nullable="false" />
           <Property Name="ObjectDataId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__AppEventL__AppEv__3A4CA8FD">
-          <End Role="AppEventLog" Type="Self.AppEventLog" Multiplicity="1" />
-          <End Role="AppEventLog1" Type="Self.AppEventLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppEventLog">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AppEventLog1">
-              <PropertyRef Name="AppEventTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__AppEventL__Appli__37703C52">
           <End Role="Application" Type="Self.Application" Multiplicity="1" />
           <End Role="AppEventLog" Type="Self.AppEventLog" Multiplicity="*" />
@@ -708,10 +696,6 @@
           <EntitySet Name="TraceLog" EntityType="Self.TraceLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TraceLogAncillaryData" EntityType="Self.TraceLogAncillaryData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TraceLogObjectData" EntityType="Self.TraceLogObjectData" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__AppEventL__AppEv__3A4CA8FD" Association="Self.FK__AppEventL__AppEv__3A4CA8FD">
-            <End Role="AppEventLog" EntitySet="AppEventLog" />
-            <End Role="AppEventLog1" EntitySet="AppEventLog" />
-          </AssociationSet>
           <AssociationSet Name="FK__AppEventL__Appli__37703C52" Association="Self.FK__AppEventL__Appli__37703C52">
             <End Role="Application" EntitySet="Application" />
             <End Role="AppEventLog" EntitySet="AppEventLog" />
