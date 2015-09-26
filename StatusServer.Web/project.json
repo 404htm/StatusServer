@@ -13,7 +13,9 @@
         "bootstrap": "3.3.5",
         "Microsoft.AspNet.Mvc": "6.0.0-beta5",
         "Microsoft.AspNet.SignalR.Client": "2.2.0",
-"EntityFramework": "6.1.3"
+        "EntityFramework": "6.1.3",
+        "Microsoft.AspNet.Identity.Core": "2.2.1",
+        "Microsoft.AspNet.Identity.Owin": "2.2.1"
 
 
     },
