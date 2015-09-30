@@ -76,6 +76,7 @@
     <Compile Include="AssertLog.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\AppUserManager.cs" />
     <Compile Include="ContextFactory.cs" />
     <Compile Include="DAL.Context.cs">
       <AutoGen>True</AutoGen>

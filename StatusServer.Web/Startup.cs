@@ -10,6 +10,13 @@ using Microsoft.Framework.Configuration.Json;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
 
+using Microsoft.AspNet.Identity;
+
+using Microsoft.AspNet.Diagnostics;
+using Microsoft.AspNet.Diagnostics.Entity;
+using StatusServer.Web.Identity;
+using Microsoft.Framework.Logging;
+
 namespace StatusServer.Web
 {
 	
@@ -17,12 +24,41 @@ namespace StatusServer.Web
 	public class Startup
     {
 		public IConfiguration Configuration { get; set; }
-
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
 		{
+			var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
+			.AddJsonFile("config.json")
+			.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true)
+			.AddEnvironmentVariables();
+
+			if (env.IsEnvironment("Development"))
+			{
+				builder.AddUserSecrets();
+			}
+
+			builder.AddEnvironmentVariables();
+			Configuration = builder.Build();
+		}
+
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		{
+
+			if (env.IsDevelopment())
+			{
+				app.UseBrowserLink();
+				app.UseErrorPage(ErrorPageOptions.ShowAll);
+				app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+			}
+			else
+			{
+				// Add Error handling middleware which catches all application specific errors and
+				// sends the request to the following path or controller action.
+				app.UseErrorHandler("/Home/Error");
+			}
+
 			app.UseMvc();
 			app.UseStaticFiles();
-			
+			app.UseIdentity();
 
 			app.UseMvc(routes =>
 			{
@@ -42,30 +78,18 @@ namespace StatusServer.Web
 		// For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
         {
-			// Add MVC services to the services container.
-			services.AddMvc();
+			
+			services.AddIdentity<AppIdentityUser, AppRole>()
+				.AddUserManager<UserManager<AppIdentityUser>>()
+				.AddDefaultTokenProviders();
 
+			services.AddMvc();
+			//services.AddTransient<IEmailSender, AuthMessageSender>();
+			//services.AddTransient<ISmsSender, AuthMessageSender>();
 			services.AddSingleton(_ => Configuration);
 		}
 
 
-		public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
-		{
-            var configurationBuilder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
-            .AddJsonFile("config.json")
-			.AddEnvironmentVariables();
-
-			Configuration = configurationBuilder.Build();
-			//.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
-
-			if (env.IsEnvironment("Development"))
-			{
-				// This reads the configuration keys from the secret store.
-				// For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-				//configuration.AddUserSecrets();
-			}
-		
-		}
 
 		
 	}
