@@ -3,6 +3,14 @@
   "version": -9996,
   "targets": {
     "DNX,Version=v4.5.1": {
+      "BCrypt.Net/0.1.0": {
+        "compile": {
+          "lib/net35/BCrypt.Net.dll": {}
+        },
+        "runtime": {
+          "lib/net35/BCrypt.Net.dll": {}
+        }
+      },
       "bootstrap/3.3.5": {
         "dependencies": {
           "jQuery": "1.9.1"
@@ -1465,6 +1473,16 @@
     }
   },
   "libraries": {
+    "BCrypt.Net/0.1.0": {
+      "sha512": "sST2w361Dxt9GGMfpOTiK50wXGV64Ybb1hiX3xjEWnhVYZNF43NuySGwADJa7X1R+bA53NsFR+tuDxcYiJeIOA==",
+      "files": [
+        "BCrypt.Net.0.1.0.nupkg",
+        "BCrypt.Net.0.1.0.nupkg.sha512",
+        "BCrypt.Net.nuspec",
+        "lib/net35/BCrypt.Net.dll",
+        "lib/net35/BCrypt.Net.XML"
+      ]
+    },
     "bootstrap/3.3.5": {
       "sha512": "j4a7m/PsNZA90VcCf8pacPq70ZvZQ/u3FQHzRk7EakZeP5twYHJaqvc/cUznYJpEZfNzuh9AiZMMIhYhR5e+dw==",
       "files": [

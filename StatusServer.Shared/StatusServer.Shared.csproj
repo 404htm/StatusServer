@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,7 +53,14 @@
     <Compile Include="IErrorDetails.cs" />
     <Compile Include="IErrorLogger.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="PasswordManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\BCryptProvider.cs" />
+    <Compile Include="Security\SecurityProvider.cs" />
+    <Compile Include="Security\SecurityProviderFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
