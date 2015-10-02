@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using StatusServer.DAL;
-
-
+using Microsoft.AspNet.Authorization;
 
 namespace StatusServer.Web.Controllers
 {
     [Route("api/[controller]")]
+	[Authorize]
     public class ErrorLogController : Controller
     {
 

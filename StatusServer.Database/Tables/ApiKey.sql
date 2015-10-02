@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[ApiKey]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [Key] UNIQUEIDENTIFIER NOT NULL, 
+
+    [ApplicationId] INT NOT NULL FOREIGN KEY REFERENCES [Application](Id),
+	[EnvironmentId] INT NOT NULL FOREIGN KEY REFERENCES [Environment](Id),
+
+	[AuthInfoId] INT NOT NULL FOREIGN KEY REFERENCES  [AuthInfo](Id), 
+    [Active] BIT NOT NULL DEFAULT 1
+)

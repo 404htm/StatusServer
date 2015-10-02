@@ -77,6 +77,8 @@
     <Build Include="Tables\TraceLogAncillaryData.sql" />
     <Build Include="Tables\AssertLogAncillaryData.sql" />
     <Build Include="Tables\Company.sql" />
+    <Build Include="Tables\ApiKey.sql" />
+    <Build Include="Tables\AuthInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="StatusServer.Database.refactorlog" />
