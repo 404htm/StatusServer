@@ -13,7 +13,13 @@ namespace StatusServer.DAL
     using System.Collections.Generic;
     
     public partial class AppEventLog
-	{
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AppEventLog()
+        {
+            this.AppEventLog1 = new HashSet<AppEventLog>();
+        }
+    
         public int Id { get; set; }
         public System.Guid Token { get; set; }
         public System.DateTime Time { get; set; }
@@ -32,5 +38,8 @@ namespace StatusServer.DAL
         public virtual Environment Environment { get; set; }
         public virtual Module Module { get; set; }
         public virtual ApplicationVersion ApplicationVersion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppEventLog> AppEventLog1 { get; set; }
+        public virtual AppEventLog AppEventLog2 { get; set; }
     }
 }

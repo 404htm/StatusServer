@@ -15,11 +15,11 @@ namespace StatusServer.Shared.Security
 
 		public abstract string GenerateApiPassword();
 
-		public abstract byte[] GenerateSalt();
+		public abstract string GenerateSalt();
 
-		public abstract byte[] HashPassword(string password, byte[] salt);
+		public abstract string HashPassword(string password, string salt);
 
-		public abstract bool VerifyPassword(string password, byte[] salt, byte[] hash);
+		public abstract bool VerifyPassword(string password, string salt, string hash);
 
 	}
 }

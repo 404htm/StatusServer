@@ -58,6 +58,9 @@
     <Compile Include="AncillaryData.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApiKey.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppEventLog.cs">
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
@@ -77,6 +80,12 @@
       <DependentUpon>DAL.tt</DependentUpon>
     </Compile>
     <Compile Include="Authentication\AppUserManager.cs" />
+    <Compile Include="AuthInfo.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Company.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
     <Compile Include="ContextFactory.cs" />
     <Compile Include="DAL.Context.cs">
       <AutoGen>True</AutoGen>

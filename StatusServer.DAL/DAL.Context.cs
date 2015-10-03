@@ -38,5 +38,8 @@ namespace StatusServer.DAL
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<ObjectData> ObjectDatas { get; set; }
         public virtual DbSet<TraceLog> TraceLogs { get; set; }
+        public virtual DbSet<ApiKey> ApiKeys { get; set; }
+        public virtual DbSet<AuthInfo> AuthInfoes { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
     }
 }

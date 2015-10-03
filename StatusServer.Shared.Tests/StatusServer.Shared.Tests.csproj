@@ -58,6 +58,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BcryptProviderTest.cs" />
     <Compile Include="Helpers\ObjectMapperTests.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -26,11 +26,14 @@ namespace StatusServer.DAL
             this.ErrorLogs = new HashSet<ErrorLog>();
             this.Modules = new HashSet<Module>();
             this.TraceLogs = new HashSet<TraceLog>();
+            this.ApiKeys = new HashSet<ApiKey>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public int CompanyId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppEventLog> AppEventLogs { get; set; }
@@ -50,5 +53,8 @@ namespace StatusServer.DAL
         public virtual ICollection<Module> Modules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TraceLog> TraceLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApiKey> ApiKeys { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace StatusServer.Shared.Security
 {
 	public class BCryptProvider : SecurityProvider
 	{
-		const int WORK_FACTOR = 8;
+		const int WORK_FACTOR = 12;
 		static BCryptProvider()
 		{
 			ProviderType = "BCrypt";
@@ -18,23 +18,24 @@ namespace StatusServer.Shared.Security
 			return BCrypt.Net.BCrypt.GenerateSalt(WORK_FACTOR).Substring(0, PassLength);
 		}
 
-		public override byte[] GenerateSalt()
+		public override string GenerateSalt()
 		{
-			var strSalt = BCrypt.Net.BCrypt.GenerateSalt(WORK_FACTOR);
-			return Convert.FromBase64String(strSalt);
+			return BCrypt.Net.BCrypt.GenerateSalt(WORK_FACTOR);
         }
 
-		public override byte[] HashPassword(string password, byte[] salt)
+		public override string HashPassword(string password, string salt)
 		{
-			var strSalt = Convert.ToBase64String(salt);
-			var strHash = BCrypt.Net.BCrypt.HashPassword(password + strSalt, WORK_FACTOR);
-			return Convert.FromBase64String(strHash);
+			return BCrypt.Net.BCrypt.HashPassword(Combine(password, salt), WORK_FACTOR);
         }
 
-		public override bool VerifyPassword(string password, byte[] salt, byte[] hash)
+		public override bool VerifyPassword(string password, string salt, string hash)
 		{
-			var compare_hash = HashPassword(password, salt);
-			return hash.SequenceEqual(compare_hash);
+			return BCrypt.Net.BCrypt.Verify(Combine(password, salt), hash);
+		}
+
+		private string Combine(string password, string salt)
+		{
+			return String.Concat(password + "|" + salt);
 		}
 	}
 }

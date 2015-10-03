@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[AuthInfo]
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
-    [PassHash] VARBINARY(60) NOT NULL,
-	[Salt] VARBINARY(60) NOT NULL,
+    [PassHash] VARCHAR(256) NOT NULL,
+	[Salt] VARCHAR(256) NOT NULL,
 	[HashType] VARCHAR(200)
 )

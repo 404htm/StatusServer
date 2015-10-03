@@ -22,6 +22,7 @@ namespace StatusServer.DAL
             this.AssertLogs = new HashSet<AssertLog>();
             this.ErrorLogs = new HashSet<ErrorLog>();
             this.TraceLogs = new HashSet<TraceLog>();
+            this.ApiKeys = new HashSet<ApiKey>();
         }
     
         public int Id { get; set; }
@@ -42,5 +43,7 @@ namespace StatusServer.DAL
         public virtual ICollection<ErrorLog> ErrorLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TraceLog> TraceLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApiKey> ApiKeys { get; set; }
     }
 }

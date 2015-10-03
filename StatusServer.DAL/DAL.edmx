@@ -14,6 +14,17 @@
           <Property Name="Message" Type="varchar" MaxLength="1000" />
           <Property Name="Content" Type="text" />
         </EntityType>
+        <EntityType Name="ApiKey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Key" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="EnvironmentId" Type="int" Nullable="false" />
+          <Property Name="AuthInfoId" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="AppEventLog">
           <Key>
             <PropertyRef Name="Id" />
@@ -59,6 +70,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ApplicationVersion">
           <Key>
@@ -107,6 +120,24 @@
           </Key>
           <Property Name="AssertLogId" Type="int" Nullable="false" />
           <Property Name="ObjectDataId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuthInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PassHash" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Salt" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="HashType" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Environment">
           <Key>
@@ -209,6 +240,54 @@
           <Property Name="TraceLogId" Type="int" Nullable="false" />
           <Property Name="ObjectDataId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__ApiKey__Applicat__55F4C372">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiKey">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ApiKey__AuthInfo__57DD0BE4">
+          <End Role="AuthInfo" Type="Self.AuthInfo" Multiplicity="1" />
+          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiKey">
+              <PropertyRef Name="AuthInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ApiKey__Environm__56E8E7AB">
+          <End Role="Environment" Type="Self.Environment" Multiplicity="1" />
+          <End Role="ApiKey" Type="Self.ApiKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiKey">
+              <PropertyRef Name="EnvironmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppEventL__AppEv__3A4CA8FD">
+          <End Role="AppEventLog" Type="Self.AppEventLog" Multiplicity="1" />
+          <End Role="AppEventLog1" Type="Self.AppEventLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppEventLog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppEventLog1">
+              <PropertyRef Name="AppEventTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__AppEventL__Appli__37703C52">
           <End Role="Application" Type="Self.Application" Multiplicity="1" />
           <End Role="AppEventLog" Type="Self.AppEventLog" Multiplicity="*" />
@@ -290,6 +369,18 @@
             </Principal>
             <Dependent Role="ApplicationVersion">
               <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__Compa__58D1301D">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,6 +770,7 @@
         </Association>
         <EntityContainer Name="DALStoreContainer">
           <EntitySet Name="AncillaryData" EntityType="Self.AncillaryData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApiKey" EntityType="Self.ApiKey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppEventLog" EntityType="Self.AppEventLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppEventType" EntityType="Self.AppEventType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppEventTypeGroup" EntityType="Self.AppEventTypeGroup" Schema="dbo" store:Type="Tables" />
@@ -687,6 +779,8 @@
           <EntitySet Name="AssertLog" EntityType="Self.AssertLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AssertLogAncillaryData" EntityType="Self.AssertLogAncillaryData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AssertLogObjectData" EntityType="Self.AssertLogObjectData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthInfo" EntityType="Self.AuthInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Environment" EntityType="Self.Environment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorLogAncillaryData" EntityType="Self.ErrorLogAncillaryData" Schema="dbo" store:Type="Tables" />
@@ -696,6 +790,22 @@
           <EntitySet Name="TraceLog" EntityType="Self.TraceLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TraceLogAncillaryData" EntityType="Self.TraceLogAncillaryData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TraceLogObjectData" EntityType="Self.TraceLogObjectData" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ApiKey__Applicat__55F4C372" Association="Self.FK__ApiKey__Applicat__55F4C372">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ApiKey" EntitySet="ApiKey" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ApiKey__AuthInfo__57DD0BE4" Association="Self.FK__ApiKey__AuthInfo__57DD0BE4">
+            <End Role="AuthInfo" EntitySet="AuthInfo" />
+            <End Role="ApiKey" EntitySet="ApiKey" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ApiKey__Environm__56E8E7AB" Association="Self.FK__ApiKey__Environm__56E8E7AB">
+            <End Role="Environment" EntitySet="Environment" />
+            <End Role="ApiKey" EntitySet="ApiKey" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppEventL__AppEv__3A4CA8FD" Association="Self.FK__AppEventL__AppEv__3A4CA8FD">
+            <End Role="AppEventLog" EntitySet="AppEventLog" />
+            <End Role="AppEventLog1" EntitySet="AppEventLog" />
+          </AssociationSet>
           <AssociationSet Name="FK__AppEventL__Appli__37703C52" Association="Self.FK__AppEventL__Appli__37703C52">
             <End Role="Application" EntitySet="Application" />
             <End Role="AppEventLog" EntitySet="AppEventLog" />
@@ -723,6 +833,10 @@
           <AssociationSet Name="FK__Applicati__Appli__08B54D69" Association="Self.FK__Applicati__Appli__08B54D69">
             <End Role="Application" EntitySet="Application" />
             <End Role="ApplicationVersion" EntitySet="ApplicationVersion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__Compa__58D1301D" Association="Self.FK__Applicati__Compa__58D1301D">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Application" EntitySet="Application" />
           </AssociationSet>
           <AssociationSet Name="FK__Applicati__Envir__09A971A2" Association="Self.FK__Applicati__Envir__09A971A2">
             <End Role="Environment" EntitySet="Environment" />
@@ -978,6 +1092,29 @@
             <End Role="ObjectData" EntitySet="ObjectDatas" />
             <End Role="TraceLog" EntitySet="TraceLogs" />
           </AssociationSet>
+          <EntitySet Name="ApiKeys" EntityType="DAL.ApiKey" />
+          <EntitySet Name="AuthInfoes" EntityType="DAL.AuthInfo" />
+          <EntitySet Name="Companies" EntityType="DAL.Company" />
+          <AssociationSet Name="FK__ApiKey__Applicat__55F4C372" Association="DAL.FK__ApiKey__Applicat__55F4C372">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="ApiKey" EntitySet="ApiKeys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ApiKey__AuthInfo__57DD0BE4" Association="DAL.FK__ApiKey__AuthInfo__57DD0BE4">
+            <End Role="AuthInfo" EntitySet="AuthInfoes" />
+            <End Role="ApiKey" EntitySet="ApiKeys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ApiKey__Environm__56E8E7AB" Association="DAL.FK__ApiKey__Environm__56E8E7AB">
+            <End Role="Environment" EntitySet="Environments" />
+            <End Role="ApiKey" EntitySet="ApiKeys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppEventL__AppEv__3A4CA8FD" Association="DAL.FK__AppEventL__AppEv__3A4CA8FD">
+            <End Role="AppEventLog" EntitySet="AppEventLogs" />
+            <End Role="AppEventLog1" EntitySet="AppEventLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__Compa__58D1301D" Association="DAL.FK__Applicati__Compa__58D1301D">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AncillaryData">
           <Key>
@@ -1012,6 +1149,8 @@
           <NavigationProperty Name="Environment" Relationship="DAL.FK__AppEventL__Envir__3864608B" FromRole="AppEventLog" ToRole="Environment" />
           <NavigationProperty Name="Module" Relationship="DAL.FK__AppEventL__Modul__395884C4" FromRole="AppEventLog" ToRole="Module" />
           <NavigationProperty Name="ApplicationVersion" Relationship="DAL.FK_AppEventLog_ApplicationVersion" FromRole="AppEventLog" ToRole="ApplicationVersion" />
+          <NavigationProperty Name="AppEventLog1" Relationship="DAL.FK__AppEventL__AppEv__3A4CA8FD" FromRole="AppEventLog" ToRole="AppEventLog1" />
+          <NavigationProperty Name="AppEventLog2" Relationship="DAL.FK__AppEventL__AppEv__3A4CA8FD" FromRole="AppEventLog1" ToRole="AppEventLog" />
         </EntityType>
         <EntityType Name="AppEventType">
           <Key>
@@ -1053,6 +1192,10 @@
           <NavigationProperty Name="ErrorLogs" Relationship="DAL.FK__ErrorLog__Applic__46B27FE2" FromRole="Application" ToRole="ErrorLog" />
           <NavigationProperty Name="Modules" Relationship="DAL.FK__Modules__Applica__656C112C" FromRole="Application" ToRole="Module" />
           <NavigationProperty Name="TraceLogs" Relationship="DAL.FK__TraceLog__Applic__0E6E26BF" FromRole="Application" ToRole="TraceLog" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApiKeys" Relationship="DAL.FK__ApiKey__Applicat__55F4C372" FromRole="Application" ToRole="ApiKey" />
+          <NavigationProperty Name="Company" Relationship="DAL.FK__Applicati__Compa__58D1301D" FromRole="Application" ToRole="Company" />
         </EntityType>
         <EntityType Name="ApplicationVersion">
           <Key>
@@ -1115,6 +1258,7 @@
           <NavigationProperty Name="AssertLogs" Relationship="DAL.FK__AssertLog__Envir__40058253" FromRole="Environment" ToRole="AssertLog" />
           <NavigationProperty Name="ErrorLogs" Relationship="DAL.FK__ErrorLog__Enviro__47A6A41B" FromRole="Environment" ToRole="ErrorLog" />
           <NavigationProperty Name="TraceLogs" Relationship="DAL.FK__TraceLog__Enviro__0F624AF8" FromRole="Environment" ToRole="TraceLog" />
+          <NavigationProperty Name="ApiKeys" Relationship="DAL.FK__ApiKey__Environm__56E8E7AB" FromRole="Environment" ToRole="ApiKey" />
         </EntityType>
         <EntityType Name="ErrorLog">
           <Key>
@@ -1531,6 +1675,100 @@
           <End Type="DAL.ObjectData" Role="ObjectData" Multiplicity="*" />
           <End Type="DAL.TraceLog" Role="TraceLog" Multiplicity="*" />
         </Association>
+        <EntityType Name="ApiKey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Key" Type="Guid" Nullable="false" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="EnvironmentId" Type="Int32" Nullable="false" />
+          <Property Name="AuthInfoId" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="DAL.FK__ApiKey__Applicat__55F4C372" FromRole="ApiKey" ToRole="Application" />
+          <NavigationProperty Name="AuthInfo" Relationship="DAL.FK__ApiKey__AuthInfo__57DD0BE4" FromRole="ApiKey" ToRole="AuthInfo" />
+          <NavigationProperty Name="Environment" Relationship="DAL.FK__ApiKey__Environm__56E8E7AB" FromRole="ApiKey" ToRole="Environment" />
+        </EntityType>
+        <EntityType Name="AuthInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PassHash" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="HashType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ApiKeys" Relationship="DAL.FK__ApiKey__AuthInfo__57DD0BE4" FromRole="AuthInfo" ToRole="ApiKey" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Applications" Relationship="DAL.FK__Applicati__Compa__58D1301D" FromRole="Company" ToRole="Application" />
+        </EntityType>
+        <Association Name="FK__ApiKey__Applicat__55F4C372">
+          <End Type="DAL.Application" Role="Application" Multiplicity="1" />
+          <End Type="DAL.ApiKey" Role="ApiKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiKey">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ApiKey__AuthInfo__57DD0BE4">
+          <End Type="DAL.AuthInfo" Role="AuthInfo" Multiplicity="1" />
+          <End Type="DAL.ApiKey" Role="ApiKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiKey">
+              <PropertyRef Name="AuthInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ApiKey__Environm__56E8E7AB">
+          <End Type="DAL.Environment" Role="Environment" Multiplicity="1" />
+          <End Type="DAL.ApiKey" Role="ApiKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApiKey">
+              <PropertyRef Name="EnvironmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppEventL__AppEv__3A4CA8FD">
+          <End Type="DAL.AppEventLog" Role="AppEventLog" Multiplicity="1" />
+          <End Type="DAL.AppEventLog" Role="AppEventLog1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppEventLog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppEventLog1">
+              <PropertyRef Name="AppEventTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__Compa__58D1301D">
+          <End Type="DAL.Company" Role="Company" Multiplicity="1" />
+          <End Type="DAL.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1590,6 +1828,8 @@
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="DAL.Application">
               <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1749,6 +1989,38 @@
               <ScalarProperty Name="Id" ColumnName="ObjectDataId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ApiKeys">
+            <EntityTypeMapping TypeName="DAL.ApiKey">
+              <MappingFragment StoreEntitySet="ApiKey">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AuthInfoId" ColumnName="AuthInfoId" />
+                <ScalarProperty Name="EnvironmentId" ColumnName="EnvironmentId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuthInfoes">
+            <EntityTypeMapping TypeName="DAL.AuthInfo">
+              <MappingFragment StoreEntitySet="AuthInfo">
+                <ScalarProperty Name="HashType" ColumnName="HashType" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="PassHash" ColumnName="PassHash" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="DAL.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
