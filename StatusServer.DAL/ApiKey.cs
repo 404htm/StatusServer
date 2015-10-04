@@ -16,12 +16,10 @@ namespace StatusServer.DAL
     {
         public int Id { get; set; }
         public System.Guid Key { get; set; }
-        public int ApplicationId { get; set; }
         public int EnvironmentId { get; set; }
         public int AuthInfoId { get; set; }
         public bool Active { get; set; }
     
-        public virtual Application Application { get; set; }
         public virtual AuthInfo AuthInfo { get; set; }
         public virtual Environment Environment { get; set; }
     }

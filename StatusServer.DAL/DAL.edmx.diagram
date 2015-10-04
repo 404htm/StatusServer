@@ -5,32 +5,36 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6a362c6e83a44cea988070d6582f36cd" Name="Diagram1" ShowGrid="true" ZoomLevel="55">
-        <EntityTypeShape EntityType="DAL.AncillaryData" Width="1.5" PointX="15" PointY="5.875" />
-        <EntityTypeShape EntityType="DAL.AppEventLog" Width="1.5" PointX="4.5" PointY="6.125" />
-        <EntityTypeShape EntityType="DAL.AppEventType" Width="1.5" PointX="7.25" PointY="16.25" />
-        <EntityTypeShape EntityType="DAL.AppEventTypeGroup" Width="1.5" PointX="7" PointY="6.25" />
-        <EntityTypeShape EntityType="DAL.Application" Width="1.5" PointX="2.75" PointY="0.5" FillColor="0, 0, 192" />
-        <EntityTypeShape EntityType="DAL.ApplicationVersion" Width="1.5" PointX="15" PointY="8.875" />
-        <EntityTypeShape EntityType="DAL.AssertLog" Width="1.5" PointX="12.75" PointY="13.125" />
-        <EntityTypeShape EntityType="DAL.Environment" Width="1.5" PointX="7.25" PointY="0.5" FillColor="0, 0, 192" />
-        <EntityTypeShape EntityType="DAL.ErrorLog" Width="1.5" PointX="2.5" PointY="6.125" />
-        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="5" PointY="0.5" FillColor="0, 0, 192" />
-        <EntityTypeShape EntityType="DAL.ObjectData" Width="1.5" PointX="15" PointY="17.375" />
-        <EntityTypeShape EntityType="DAL.TraceLog" Width="1.5" PointX="17.25" PointY="13.375" />
-        <AssociationConnector Association="DAL.FK__AppEventL__Appli__37703C52" />
+        <EntityTypeShape EntityType="DAL.AncillaryData" Width="1.5" PointX="6.125" PointY="13.25" FillColor="Purple" />
+        <EntityTypeShape EntityType="DAL.ApiKey" Width="1.5" PointX="14.375" PointY="3" FillColor="128, 255, 128" />
+        <EntityTypeShape EntityType="DAL.AppEventLog" Width="1.5" PointX="5.75" PointY="7.125" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="DAL.AppEventType" Width="1.5" PointX="0.625" PointY="10.25" />
+        <EntityTypeShape EntityType="DAL.AppEventTypeGroup" Width="1.5" PointX="0.625" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DAL.Application" Width="1.5" PointX="7" PointY="0.5" FillColor="Green" />
+        <EntityTypeShape EntityType="DAL.ApplicationVersion" Width="1.5" PointX="0.625" PointY="3.75" />
+        <EntityTypeShape EntityType="DAL.AssertLog" Width="1.5" PointX="3.75" PointY="7.125" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="DAL.AuthInfo" Width="1.5" PointX="14.375" PointY="0.5" FillColor="128, 255, 128" />
+        <EntityTypeShape EntityType="DAL.Company" Width="1.5" PointX="5" PointY="0.5" FillColor="Green" />
+        <EntityTypeShape EntityType="DAL.Environment" Width="1.5" PointX="9" PointY="0.5" FillColor="Green" />
+        <EntityTypeShape EntityType="DAL.ErrorLog" Width="1.5" PointX="7.75" PointY="7.125" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="DAL.Module" Width="1.5" PointX="11" PointY="0.5" FillColor="Green" />
+        <EntityTypeShape EntityType="DAL.ObjectData" Width="1.5" PointX="3.75" PointY="13.25" FillColor="Purple" />
+        <EntityTypeShape EntityType="DAL.TraceLog" Width="1.5" PointX="9.625" PointY="7.125" FillColor="192, 0, 0" />
+        <AssociationConnector Association="DAL.FK__ApiKey__AuthInfo__57DD0BE4" />
+        <AssociationConnector Association="DAL.FK__ApiKey__Environm__56E8E7AB" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="DAL.FK__AppEventL__AppEv__3A4CA8FD" />
         <AssociationConnector Association="DAL.FK__AppEventL__Envir__3864608B" />
         <AssociationConnector Association="DAL.FK__AppEventL__Modul__395884C4" />
         <AssociationConnector Association="DAL.FK_AppEventLog_ApplicationVersion" />
-        <AssociationConnector Association="DAL.FK__AppEventT__Appli__3B40CD36" />
-        <AssociationConnector Association="DAL.FK__AppEventT__Event__3C34F16F" />
-        <AssociationConnector Association="DAL.FK__AppEventT__Appli__3D2915A8" />
-        <AssociationConnector Association="DAL.FK__Applicati__Appli__08B54D69" ManuallyRouted="false" >
+        <AssociationConnector Association="DAL.FK__AppEventT__Appli__3B40CD36" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="DAL.FK__AssertLog__Appli__3F115E1A" />
+        <AssociationConnector Association="DAL.FK__AppEventT__Event__3C34F16F" />
+        <AssociationConnector Association="DAL.FK__AppEventT__Appli__3D2915A8" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="DAL.FK__Applicati__Compa__58D1301D" />
         <AssociationConnector Association="DAL.FK__Environme__Appli__66603565" />
-        <AssociationConnector Association="DAL.FK__ErrorLog__Applic__46B27FE2" />
         <AssociationConnector Association="DAL.FK__Modules__Applica__656C112C" />
-        <AssociationConnector Association="DAL.FK__TraceLog__Applic__0E6E26BF" />
         <AssociationConnector Association="DAL.FK__Applicati__Envir__09A971A2" />
         <AssociationConnector Association="DAL.FK__Applicati__Modul__0A9D95DB" />
         <AssociationConnector Association="DAL.FK_AssertLog_ApplicationVersion" />
@@ -40,22 +44,38 @@
         <AssociationConnector Association="DAL.FK__AssertLog__Modul__40F9A68C" />
         <AssociationConnector Association="DAL.FK__ErrorLog__Enviro__47A6A41B" />
         <AssociationConnector Association="DAL.FK__TraceLog__Enviro__0F624AF8" />
-        <AssociationConnector Association="DAL.FK__ErrorLog__Module__489AC854" />
+        <AssociationConnector Association="DAL.FK__ErrorLog__Module__489AC854" ManuallyRouted="true" >
+          <ConnectorPoint PointX="11.84375" PointY="3.6340950520833388" />
+          <ConnectorPoint PointX="11.84375" PointY="11.532490611979199" />
+          <ConnectorPoint PointX="10.458333333333334" PointY="11.532490611979199" />
+          <ConnectorPoint PointX="10.291666666666666" PointY="11.532490611979199" />
+          <ConnectorPoint PointX="10.052080833333333" PointY="11.532490611979199" />
+          <ConnectorPoint PointX="9.8854141666666653" PointY="11.532490611979199" />
+          <ConnectorPoint PointX="9.25" PointY="11.532490611979199" />
+        </AssociationConnector>
         <AssociationConnector Association="DAL.FK__TraceLog__Module__10566F31" />
-        <AssociationConnector Association="DAL.AssertLogAncillaryData" />
+        <AssociationConnector Association="DAL.AssertLogAncillaryData" ManuallyRouted="true" >
+          <ConnectorPoint PointX="7.625" PointY="14.303842549486234" />
+          <ConnectorPoint PointX="7.74875" PointY="14.303842549486234" />
+          <ConnectorPoint PointX="7.74875" PointY="13.002706493109344" />
+          <ConnectorPoint PointX="8" PointY="13.002706493109344" />
+          <ConnectorPoint PointX="8" PointY="12.875" />
+          <ConnectorPoint PointX="7.489583333333333" PointY="12.875" />
+          <ConnectorPoint PointX="7.322916666666667" PointY="12.875" />
+          <ConnectorPoint PointX="5.5" PointY="12.875" />
+          <ConnectorPoint PointX="5.5" PointY="6.75" />
+          <ConnectorPoint PointX="5.10755966240728" PointY="6.7499999999999991" />
+          <ConnectorPoint PointX="4.9408929957406142" PointY="6.75" />
+          <ConnectorPoint PointX="4.8192809914812287" PointY="6.7499999999999991" />
+          <ConnectorPoint PointX="4.6526143248145626" PointY="6.75" />
+          <ConnectorPoint PointX="4.5584620202442148" PointY="6.75" />
+          <ConnectorPoint PointX="4.5584620202442148" PointY="7.125" />
+        </AssociationConnector>
         <AssociationConnector Association="DAL.AssertLogObjectData" />
         <AssociationConnector Association="DAL.ErrorLogAncillaryData" />
         <AssociationConnector Association="DAL.ErrorLogObjectData" />
         <AssociationConnector Association="DAL.TraceLogAncillaryData" />
         <AssociationConnector Association="DAL.TraceLogObjectData" />
-        <EntityTypeShape EntityType="DAL.ApiKey" Width="1.5" PointX="1" PointY="12.375" />
-        <EntityTypeShape EntityType="DAL.AuthInfo" Width="1.5" PointX="9" PointY="15.5" />
-        <EntityTypeShape EntityType="DAL.Company" Width="1.5" PointX="0.5" PointY="0.5" />
-        <AssociationConnector Association="DAL.FK__ApiKey__Applicat__55F4C372" />
-        <AssociationConnector Association="DAL.FK__ApiKey__AuthInfo__57DD0BE4" />
-        <AssociationConnector Association="DAL.FK__ApiKey__Environm__56E8E7AB" />
-        <AssociationConnector Association="DAL.FK__AppEventL__AppEv__3A4CA8FD" />
-        <AssociationConnector Association="DAL.FK__Applicati__Compa__58D1301D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -3,7 +3,6 @@
 	[Id] INT NOT NULL PRIMARY KEY, 
     [Key] UNIQUEIDENTIFIER NOT NULL, 
 
-    [ApplicationId] INT NOT NULL FOREIGN KEY REFERENCES [Application](Id),
 	[EnvironmentId] INT NOT NULL FOREIGN KEY REFERENCES [Environment](Id),
 
 	[AuthInfoId] INT NOT NULL FOREIGN KEY REFERENCES  [AuthInfo](Id), 

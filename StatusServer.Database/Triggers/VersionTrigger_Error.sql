@@ -4,6 +4,6 @@
 	AS
 	BEGIN
 		DECLARE @version AS EventTableType;
-		Insert INTO @version SELECT [ApplicationId], [EnvironmentId], [ModuleId], [Version] FROM INSERTED;
+		Insert INTO @version SELECT [EnvironmentId], [ModuleId], [Version] FROM INSERTED;
 		EXEC UpdateVersionTable @version;
 	END

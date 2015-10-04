@@ -19,6 +19,7 @@ namespace StatusServer.DAL
             : base("name=Context")
         {
             this.Configuration.LazyLoadingEnabled = false;
+            AppEventTypes = Set<AppEventType>();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,19 +28,19 @@ namespace StatusServer.DAL
         }
     
         public virtual DbSet<AncillaryData> AncillaryDatas { get; set; }
+        public virtual DbSet<ApiKey> ApiKeys { get; set; }
         public virtual DbSet<AppEventLog> AppEventLogs { get; set; }
-        public virtual DbSet<AppEventType> AppEventTypes { get; set; }
+        internal virtual DbSet<AppEventType> AppEventTypes { get; set; }
         public virtual DbSet<AppEventTypeGroup> AppEventTypeGroups { get; set; }
         public virtual DbSet<Application> Applications { get; set; }
         public virtual DbSet<ApplicationVersion> ApplicationVersions { get; set; }
         public virtual DbSet<AssertLog> AssertLogs { get; set; }
+        public virtual DbSet<AuthInfo> AuthInfoes { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Environment> Environments { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<ObjectData> ObjectDatas { get; set; }
         public virtual DbSet<TraceLog> TraceLogs { get; set; }
-        public virtual DbSet<ApiKey> ApiKeys { get; set; }
-        public virtual DbSet<AuthInfo> AuthInfoes { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
     }
 }

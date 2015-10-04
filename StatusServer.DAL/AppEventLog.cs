@@ -24,7 +24,6 @@ namespace StatusServer.DAL
         public System.Guid Token { get; set; }
         public System.DateTime Time { get; set; }
         public string UserName { get; set; }
-        public int ApplicationId { get; set; }
         public int EnvironmentId { get; set; }
         public Nullable<int> ModuleId { get; set; }
         public string Version { get; set; }
@@ -34,12 +33,11 @@ namespace StatusServer.DAL
         public int AppEventTypeId { get; set; }
         public string Message { get; set; }
     
-        public virtual Application Application { get; set; }
-        public virtual Environment Environment { get; set; }
-        public virtual Module Module { get; set; }
-        public virtual ApplicationVersion ApplicationVersion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppEventLog> AppEventLog1 { get; set; }
         public virtual AppEventLog AppEventLog2 { get; set; }
+        public virtual Environment Environment { get; set; }
+        public virtual Module Module { get; set; }
+        public virtual ApplicationVersion ApplicationVersion { get; set; }
     }
 }

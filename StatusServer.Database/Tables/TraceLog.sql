@@ -5,7 +5,6 @@
 	[Time] DATETIME NOT NULL,
 	[UserName] VARCHAR(500) NULL,
 
-	[ApplicationId] INT NOT NULL FOREIGN KEY REFERENCES [Application](Id),
 	[EnvironmentId] INT NOT NULL FOREIGN KEY REFERENCES [Environment](Id),
 	[ModuleId] INT FOREIGN KEY REFERENCES [Modules](Id),
 	[Version] VARCHAR(50),
@@ -18,5 +17,5 @@
 	--     TraceLog Specific Properties     --
 	------------------------------------------
 	[Message] VARCHAR(1000), 
-    CONSTRAINT [FK_TraceLog_ApplicationVersion] FOREIGN KEY ([Version], [ApplicationId], [EnvironmentId], [ModuleId]) REFERENCES [ApplicationVersion]([VersionNumber], [ApplicationId], [EnvironmentId], [ModuleId])
+    CONSTRAINT [FK_TraceLog_ApplicationVersion] FOREIGN KEY ([Version], [EnvironmentId], [ModuleId]) REFERENCES [ApplicationVersion]([VersionNumber], [EnvironmentId], [ModuleId])
 )

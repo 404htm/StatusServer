@@ -25,7 +25,6 @@ namespace StatusServer.DAL
         public System.Guid Token { get; set; }
         public System.DateTime Time { get; set; }
         public string UserName { get; set; }
-        public int ApplicationId { get; set; }
         public int EnvironmentId { get; set; }
         public Nullable<int> ModuleId { get; set; }
         public string Version { get; set; }
@@ -38,7 +37,6 @@ namespace StatusServer.DAL
         public string ExceptionType { get; set; }
         public string ExceptionDetail { get; set; }
     
-        public virtual Application Application { get; set; }
         public virtual ApplicationVersion ApplicationVersion { get; set; }
         public virtual Environment Environment { get; set; }
         public virtual Module Module { get; set; }
