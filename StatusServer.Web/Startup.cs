@@ -83,6 +83,8 @@ namespace StatusServer.Web
 				.AddUserManager<UserManager<AppIdentityUser>>()
 				.AddDefaultTokenProviders();
 
+
+
 			services.AddMvc();
 			//services.AddTransient<IEmailSender, AuthMessageSender>();
 			//services.AddTransient<ISmsSender, AuthMessageSender>();
