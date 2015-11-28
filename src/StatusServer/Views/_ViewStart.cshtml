@@ -1,0 +1,4 @@
+﻿@{
+    var fs = ViewContext.RouteData.Values["FullScreen"] as bool?;
+    Layout = (fs ?? false) ? "_LayoutFS" : "_Layout";
+}
