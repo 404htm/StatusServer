@@ -1,8 +1,0 @@
-﻿{
-	"Data": {
-        "DefaultConnection": {
-            "ConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=StatusServer;Trusted_Connection=True;"
-        },
-    "ApplicationName" :  "Status Server"
-	}
-}
