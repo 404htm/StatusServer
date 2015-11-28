@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[AncillaryData]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Type] VARCHAR(200),
+	[Message] VARCHAR(1000) NULL,
+	[Content] TEXT NULL
+)
