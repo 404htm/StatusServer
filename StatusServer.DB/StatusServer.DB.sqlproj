@@ -94,5 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="StatusServer.localdb.publish.xml" />
+    <None Include="azure.publish.xml" />
   </ItemGroup>
 </Project>
